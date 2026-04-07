@@ -3,35 +3,31 @@ export const systemLogs = [
     id: 1,
     type: 'user_registered',
     icon: 'person_add',
-    message: 'New merchant registered: Ahmed Hassan',
-    userId: 1,
+    message: 'New customer registered: Amir Hassan',
     severity: 'info',
     timestamp: '2026-04-06T14:30:00'
   },
   {
     id: 2,
-    type: 'verification_submitted',
-    icon: 'verified_user',
-    message: 'Verification submitted by Fatima Noor (Service Provider)',
-    userId: 4,
+    type: 'business_pending',
+    icon: 'store',
+    message: 'New business application: Atlas Construction Co.',
     severity: 'warning',
     timestamp: '2026-04-06T13:15:00'
   },
   {
     id: 3,
-    type: 'product_flagged',
-    icon: 'flag',
-    message: 'Product flagged for review: Wireless Bluetooth Headphones',
-    userId: 1,
-    severity: 'warning',
+    type: 'request_created',
+    icon: 'assignment',
+    message: 'New service request #8 from Amir Hassan',
+    severity: 'info',
     timestamp: '2026-04-06T12:00:00'
   },
   {
     id: 4,
-    type: 'subscription_upgraded',
-    icon: 'upgrade',
-    message: 'Hassan Electronics upgraded to Professional plan',
-    userId: 1,
+    type: 'business_approved',
+    icon: 'check_circle',
+    message: 'Desert Rose Beauty has been approved',
     severity: 'success',
     timestamp: '2026-04-06T11:45:00'
   },
@@ -39,26 +35,23 @@ export const systemLogs = [
     id: 5,
     type: 'user_registered',
     icon: 'person_add',
-    message: 'New customer registered: Layla Mohammed',
-    userId: 6,
+    message: 'New customer registered: Nadia Khalil',
     severity: 'info',
     timestamp: '2026-04-06T10:30:00'
   },
   {
     id: 6,
-    type: 'business_verified',
+    type: 'business_approved',
     icon: 'check_circle',
-    message: 'Sara Fashion House verification approved',
-    userId: 2,
+    message: 'Sara Fashion House application approved',
     severity: 'success',
     timestamp: '2026-04-06T09:20:00'
   },
   {
     id: 7,
-    type: 'service_completed',
+    type: 'request_completed',
     icon: 'task_alt',
-    message: 'Service request #3 completed by Omar Khalil',
-    userId: 3,
+    message: 'Service request #3 marked as completed',
     severity: 'info',
     timestamp: '2026-04-05T18:00:00'
   },
@@ -72,35 +65,33 @@ export const systemLogs = [
   },
   {
     id: 9,
-    type: 'payment_received',
-    icon: 'payments',
-    message: 'Subscription payment received from Gulf Fitness Pro',
-    severity: 'success',
+    type: 'business_rejected',
+    icon: 'cancel',
+    message: 'Business application rejected: Fraudulent Goods LLC',
+    severity: 'danger',
     timestamp: '2026-04-04T16:45:00'
   },
   {
     id: 10,
     type: 'user_suspended',
     icon: 'block',
-    message: 'TechHub Solutions temporarily suspended for review',
+    message: 'User Nadia Khalil suspended for review',
     severity: 'danger',
     timestamp: '2026-04-04T14:00:00'
   }
 ]
 
 export const platformStats = {
-  totalUsers: 6,
-  totalMerchants: 2,
-  totalServiceProviders: 2,
-  totalCustomers: 2,
-  totalBusinesses: 6,
+  totalUsers: 5,
+  totalCustomers: 4,
+  totalBusinesses: 8,
   totalProducts: 8,
-  totalServiceRequests: 7,
-  activeServiceRequests: 1,
-  pendingVerifications: 1,
+  totalServiceRequests: 9,
+  activeServiceRequests: 2,
+  pendingBusinesses: 2,
+  pendingRequests: 3,
   totalRevenue: 1274,
-  monthlyGrowth: 18.5,
-  activeSubscriptions: 3
+  monthlyGrowth: 18.5
 }
 
 export const revenueOverTime = [
@@ -114,19 +105,32 @@ export const revenueOverTime = [
 ]
 
 export const userGrowth = [
-  { month: 'Sep', merchants: 1, providers: 1, customers: 0 },
-  { month: 'Oct', merchants: 1, providers: 1, customers: 1 },
-  { month: 'Nov', merchants: 2, providers: 1, customers: 1 },
-  { month: 'Dec', merchants: 2, providers: 2, customers: 1 },
-  { month: 'Jan', merchants: 2, providers: 2, customers: 2 },
-  { month: 'Feb', merchants: 2, providers: 2, customers: 2 },
-  { month: 'Mar', merchants: 2, providers: 2, customers: 2 }
+  { month: 'Sep', customers: 0 },
+  { month: 'Oct', customers: 1 },
+  { month: 'Nov', customers: 1 },
+  { month: 'Dec', customers: 2 },
+  { month: 'Jan', customers: 3 },
+  { month: 'Feb', customers: 4 },
+  { month: 'Mar', customers: 4 }
 ]
 
-export const subscriptionBreakdown = [
-  { plan: 'Starter (Free)', count: 3, revenue: 0, color: '#7C757E' },
-  { plan: 'Professional', count: 2, revenue: 98, color: '#a854dc' },
-  { plan: 'Enterprise', count: 1, revenue: 149, color: '#64D2B1' }
+export const requestsPerDay = [
+  { day: 'Mon', requests: 5 },
+  { day: 'Tue', requests: 10 },
+  { day: 'Wed', requests: 8 },
+  { day: 'Thu', requests: 12 },
+  { day: 'Fri', requests: 6 },
+  { day: 'Sat', requests: 3 },
+  { day: 'Sun', requests: 2 }
+]
+
+export const topServices = [
+  { name: 'Delivery', count: 45, color: '#7630A3' },
+  { name: 'Web Development', count: 28, color: '#64D2B1' },
+  { name: 'Marketing', count: 22, color: '#475569' },
+  { name: 'Photography', count: 15, color: '#7630A3' },
+  { name: 'Payment Processing', count: 12, color: '#64D2B1' },
+  { name: 'Consulting', count: 8, color: '#475569' }
 ]
 
 export const topBusinesses = [
@@ -140,8 +144,8 @@ export const topBusinesses = [
 export const reportsList = [
   { id: 1, name: 'Monthly User Report – March 2026', type: 'Users', generatedAt: '2026-04-01', status: 'ready' },
   { id: 2, name: 'Revenue Summary – Q1 2026', type: 'Revenue', generatedAt: '2026-04-01', status: 'ready' },
-  { id: 3, name: 'Business Verification Audit', type: 'Compliance', generatedAt: '2026-03-28', status: 'ready' },
-  { id: 4, name: 'Service Provider Performance', type: 'Performance', generatedAt: '2026-03-25', status: 'ready' },
+  { id: 3, name: 'Business Approval Audit', type: 'Compliance', generatedAt: '2026-03-28', status: 'ready' },
+  { id: 4, name: 'Service Request Analysis', type: 'Performance', generatedAt: '2026-03-25', status: 'ready' },
   { id: 5, name: 'Product Listing Activity', type: 'Products', generatedAt: '2026-03-20', status: 'ready' }
 ]
 
@@ -149,12 +153,9 @@ export const systemSettings = {
   platformName: 'GTS Platform',
   supportEmail: 'support@gts.com',
   maintenanceMode: false,
-  autoApproveVerification: false,
-  maxProductsPerFree: 5,
-  maxProductsPerPro: 50,
-  maxProductsPerEnterprise: -1,
   enableNotifications: true,
   enableAnalytics: true,
   defaultCurrency: 'USD',
-  defaultRegion: 'UAE'
+  defaultRegion: 'UAE',
+  theme: 'dark'
 }

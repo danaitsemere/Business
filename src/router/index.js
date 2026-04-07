@@ -12,9 +12,7 @@ const routes = [
       { path: '', name: 'Welcome', component: () => import('../pages/auth/Welcome.vue') },
       { path: 'login', name: 'Login', component: () => import('../pages/auth/Login.vue') },
       { path: 'register', name: 'Register', component: () => import('../pages/auth/Register.vue') },
-      { path: 'role-select', name: 'RoleSelect', component: () => import('../pages/auth/RoleSelect.vue') },
-      { path: 'forgot-password', name: 'ForgotPassword', component: () => import('../pages/auth/ForgotPassword.vue') },
-      { path: 'verification', name: 'Verification', component: () => import('../pages/auth/Verification.vue') }
+      { path: 'forgot-password', name: 'ForgotPassword', component: () => import('../pages/auth/ForgotPassword.vue') }
     ]
   },
 
@@ -50,7 +48,10 @@ const routes = [
       { path: 'reports', name: 'AdminReports', component: () => import('../pages/admin/Reports.vue') },
       { path: 'settings', name: 'AdminSettings', component: () => import('../pages/admin/Settings.vue') }
     ]
-  }
+  },
+
+  // Catch-all redirect
+  { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
 const router = createRouter({
@@ -61,14 +62,21 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const user = JSON.parse(localStorage.getItem('gts_user') || 'null')
 
+  // Redirect logged-in users away from auth pages
+  if (user && (to.path === '/' || to.path === '/login' || to.path === '/register')) {
+    if (user.role === 'admin') return '/admin/dashboard'
+    return '/customer/home'
+  }
+
+  // Protect authenticated routes
   if (to.meta.requiresAuth && !user) {
     return '/login'
   }
-  
-  // Specific role redirection if logged in and trying to access wrong portal
-  if (user && to.path === '/') {
-    if (user.role === 'admin') return '/admin/dashboard'
-    if (user.role === 'customer') return '/customer/home'
+
+  // Role-based access control
+  if (to.meta.role && user?.role !== to.meta.role) {
+    if (user?.role === 'admin') return '/admin/dashboard'
+    return '/customer/home'
   }
 })
 
