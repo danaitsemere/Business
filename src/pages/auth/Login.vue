@@ -60,24 +60,6 @@
       <p class="mt-8 text-sm font-medium text-[#475569]">
         Don't have an account? <router-link to="/register" class="text-[#7630A3] font-black hover:underline">Create one</router-link>
       </p>
-
-      <!-- Demo Accounts -->
-      <div class="mt-10 pt-8 border-t border-[#EEEAF2]">
-        <p class="text-[0.625rem] font-black uppercase tracking-[0.2em] text-[#7C757E] text-center mb-6">Quick Demo Access</p>
-        <div class="grid grid-cols-2 gap-3 text-left">
-          <button v-for="demo in demoAccounts" :key="demo.email"
-            class="flex items-center gap-3 px-4 py-3 bg-[#F8F6FB] border border-[#EEEAF2] rounded-xl hover:border-[#7630A3] hover:bg-white transition-all shadow-sm group"
-            @click="fillDemo(demo)">
-            <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-white shadow-sm text-[#7630A3] group-hover:bg-[#7630A3] group-hover:text-white transition-colors">
-              <span class="material-icons-round text-lg">{{ demo.icon }}</span>
-            </div>
-            <div class="truncate">
-              <span class="block text-[0.75rem] font-black text-[#1A1225] leading-none mb-0.5 truncate">{{ demo.label }}</span>
-              <span class="block text-[0.625rem] text-[#7C757E] font-bold truncate">{{ demo.email }}</span>
-            </div>
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -94,13 +76,6 @@ const password = ref('')
 const rememberMe = ref(false)
 const error = ref('')
 const loading = ref(false)
-
-const demoAccounts = [
-  { label: 'Admin', email: 'admin@gts.com', icon: 'admin_panel_settings' },
-  { label: 'Customer', email: 'yusuf@gts.com', icon: 'person' }
-]
-
-function fillDemo(demo) { email.value = demo.email; password.value = 'password123' }
 
 function handleLogin() {
   error.value = ''

@@ -37,10 +37,10 @@
 
       <!-- Actions -->
       <div class="flex flex-col sm:flex-row gap-4 mb-14 relative z-10">
-        <router-link to="/login" class="flex-1 btn-gts-primary !py-5 rounded-2xl shadow-soft font-black text-sm uppercase tracking-widest">
+        <router-link to="/login" class="flex-1 btn-gts-primary !py-5 rounded-2xl shadow-soft font-black text-sm uppercase tracking-widest text-center">
            Sign In
         </router-link>
-        <router-link to="/register" class="flex-1 bg-[#EEEAF2] text-[#7630A3] font-black py-5 rounded-2xl hover:bg-[#E8E1EF] transition-colors text-sm uppercase tracking-widest text-center">
+        <router-link to="/register" class="flex-1 bg-[#EEEAF2] text-[#7630A3] font-black py-5 rounded-2xl hover:bg-[#E8E1EF] transition-colors text-sm uppercase tracking-widest text-center text-center">
            Create Account
         </router-link>
       </div>

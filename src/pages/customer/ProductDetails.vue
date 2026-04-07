@@ -77,14 +77,14 @@
               <div>
                  <span class="text-[0.625rem] font-black uppercase text-slate-400 tracking-widest mb-1 block">Unit Price</span>
                  <div class="flex items-center gap-3">
-                   <span class="text-3xl font-black text-[#1A1225]">${{ (product.salePrice || product.price).toLocaleString() }}</span>
-                   <span v-if="product.salePrice" class="text-lg text-slate-400 line-through font-bold">${{ product.price.toLocaleString() }}</span>
+                   <span class="text-3xl font-black text-[#1A1225]">ETB {{ (product.salePrice || product.price).toLocaleString() }}</span>
+                   <span v-if="product.salePrice" class="text-lg text-slate-400 line-through font-bold">ETB {{ product.price.toLocaleString() }}</span>
                    <span v-if="product.salePrice" class="bg-red-500/10 text-red-500 text-xs font-black px-2 py-0.5 rounded">-{{ Math.round((1 - product.salePrice/product.price) * 100) }}%</span>
                  </div>
               </div>
               <div class="text-right">
                  <span class="text-[0.625rem] font-black uppercase text-slate-400 tracking-widest mb-1 block">Subtotal</span>
-                 <span class="text-3xl font-black text-[#7630A3] tracking-tight">${{ calculateSubtotal().toLocaleString() }}</span>
+                 <span class="text-3xl font-black text-[#7630A3] tracking-tight">ETB {{ calculateSubtotal().toLocaleString() }}</span>
               </div>
            </div>
 
@@ -193,7 +193,7 @@
             <span v-else class="material-icons-round text-2xl text-[#EEEAF2]">inventory_2</span>
           </div>
           <h4 class="font-black text-xs text-[#1A1225] truncate mb-1">{{ rp.name }}</h4>
-          <span class="text-sm font-black text-primary-500">${{ (rp.salePrice || rp.price).toLocaleString() }}</span>
+          <span class="text-sm font-black text-primary-500">ETB {{ (rp.salePrice || rp.price).toLocaleString() }}</span>
         </div>
       </div>
     </div>
@@ -259,11 +259,11 @@ const productFeatures = computed(() => {
 
 // Fake reviews
 const fakeReviews = [
-  { id: 1, name: 'Ahmed Hassan', date: 'Mar 15, 2026', rating: 5, comment: 'Absolutely incredible quality! The build and finish are premium. Sound quality exceeded my expectations — bass is deep, mids are clear, and highs are crisp. Highly recommended!', verified: true },
-  { id: 2, name: 'Sarah Chen', date: 'Mar 10, 2026', rating: 4, comment: 'Great product overall. The design is sleek and comfortable for long use. Battery life is impressive. Only minor issue is the carrying case could be more sturdy.', verified: true },
-  { id: 3, name: 'Michael Torres', date: 'Feb 28, 2026', rating: 5, comment: 'Best purchase I\'ve made this year. The noise cancellation is top-notch and the connectivity is seamless. Works perfectly with my phone and laptop.', verified: true },
-  { id: 4, name: 'Fatima Al-Rashid', date: 'Feb 20, 2026', rating: 5, comment: 'Premium quality that justifies the price tag. I\'ve tried many brands but this one stands out in terms of both aesthetics and performance.', verified: false },
-  { id: 5, name: 'James Wilson', date: 'Feb 12, 2026', rating: 4, comment: 'Very satisfied with the purchase. Shipping was fast and the product arrived in perfect condition. Works exactly as described.', verified: true }
+  { id: 1, name: 'Dawit Mekonnen', date: 'Mar 15, 2026', rating: 5, comment: 'Absolutely incredible quality! The build and finish are premium. Sound quality exceeded my expectations — bass is deep, mids are clear, and highs are crisp. Highly recommended!', verified: true },
+  { id: 2, name: 'Sara Tadesse', date: 'Mar 10, 2026', rating: 4, comment: 'Great product overall. The design is sleek and comfortable for long use. Battery life is impressive. Only minor issue is the carrying case could be more sturdy.', verified: true },
+  { id: 3, name: 'Henok Girma', date: 'Feb 28, 2026', rating: 5, comment: 'Best purchase I\'ve made this year. The noise cancellation is top-notch and the connectivity is seamless. Works perfectly with my phone and laptop.', verified: true },
+  { id: 4, name: 'Bethlehem Asfaw', date: 'Feb 20, 2026', rating: 5, comment: 'Premium quality that justifies the price tag. I\'ve tried many brands but this one stands out in terms of both aesthetics and performance.', verified: false },
+  { id: 5, name: 'Solomon Bekele', date: 'Feb 12, 2026', rating: 4, comment: 'Very satisfied with the purchase. Shipping was fast and the product arrived in perfect condition. Works exactly as described.', verified: true }
 ]
 
 // Related products

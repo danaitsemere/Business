@@ -51,11 +51,11 @@
              <div class="w-11 h-11 rounded-full border-2 border-primary-500/20 p-0.5 group-hover:border-primary-500 transition-all duration-300 flex items-center justify-center overflow-hidden bg-[#F5F3F7] shadow-sm">
                 <img v-if="profileImg" :src="profileImg" class="w-full h-full object-cover rounded-full">
                 <div v-else class="avatar-gts w-full h-full rounded-full text-sm uppercase font-black flex items-center justify-center bg-primary-500 text-white">
-                   {{ user?.fullName?.charAt(0) || 'J' }}
+                   {{ user?.fullName?.charAt(0) || 'K' }}
                 </div>
              </div>
              <div class="hidden md:block text-left">
-               <span class="block text-sm font-black text-[#1A1225] leading-none group-hover:text-primary-500 transition-colors uppercase tracking-tight">{{ user?.fullName || 'Julian Sterling' }}</span>
+               <span class="block text-sm font-black text-[#1A1225] leading-none group-hover:text-primary-500 transition-colors uppercase tracking-tight">{{ user?.fullName || 'Kalkidan Abera' }}</span>
              </div>
           </div>
         </div>
@@ -90,7 +90,7 @@
                   </div>
                   <div class="flex-1 min-w-0">
                      <h4 class="font-black text-xs text-[#1A1225] truncate mb-1">{{ item.details?.name }}</h4>
-                     <p class="text-xs text-primary-500 font-black tracking-tighter mb-3">${{ (item.details?.salePrice || item.details?.price || 0).toLocaleString() }} × {{ item.quantity }}</p>
+                     <p class="text-xs text-primary-500 font-black tracking-tighter mb-3">ETB {{ (item.details?.salePrice || item.details?.price || 0).toLocaleString() }} × {{ item.quantity }}</p>
                      <div class="flex items-center gap-3">
                         <button @click="customerStore.updateCartQuantity(item.id, item.quantity - 1)" class="w-7 h-7 bg-white rounded-lg border border-[#EEEAF2] flex items-center justify-center text-secondary-300 hover:text-primary-500 text-xs font-black">-</button>
                         <span class="text-xs font-black min-w-[20px] text-center">{{ item.quantity }}</span>
@@ -115,7 +115,7 @@
                   </div>
                   <div class="flex-1 min-w-0">
                      <h4 class="font-black text-xs text-[#1A1225] truncate mb-0.5">{{ product.name }}</h4>
-                     <span class="text-xs font-black text-primary-500 tracking-tight">${{ (product.salePrice || product.price).toLocaleString() }}</span>
+                     <span class="text-xs font-black text-primary-500 tracking-tight">ETB {{ (product.salePrice || product.price).toLocaleString() }}</span>
                   </div>
                   <button @click.stop="customerStore.toggleWishlist(product.id)" class="text-neutral-300 group-hover:text-tertiary-300 transition-colors p-2 rounded-lg bg-white/50 border border-[#EEEAF2] hover:scale-110">
                      <span class="material-icons-round text-lg">heart_broken</span>
@@ -128,7 +128,7 @@
          <div v-if="activeDrawer === 'cart' && cartItems.length" class="p-8 border-t border-[#EEEAF2] space-y-4">
            <div class="flex items-center justify-between">
              <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Total</span>
-             <span class="text-2xl font-black text-[#1A1225]">${{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
+             <span class="text-2xl font-black text-[#1A1225]">ETB {{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
            </div>
            <button @click="activeDrawer = null; $router.push('/customer/checkout')" class="btn-gts-primary w-full py-4 rounded-xl text-[0.938rem] flex items-center justify-center gap-2 group">
              Proceed to Checkout <span class="material-icons-round text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>

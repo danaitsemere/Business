@@ -43,10 +43,10 @@ const routes = [
       { path: 'businesses', name: 'AdminBusinesses', component: () => import('../pages/admin/BusinessManagement.vue') },
       { path: 'products', name: 'AdminProducts', component: () => import('../pages/admin/ProductManagement.vue') },
       { path: 'service-requests', name: 'AdminServiceRequests', component: () => import('../pages/admin/ServiceRequests.vue') },
+      { path: 'service-requests/:id', name: 'AdminServiceRequestDetail', component: () => import('../pages/admin/ServiceRequestDetail.vue') },
       { path: 'verifications', name: 'AdminVerifications', component: () => import('../pages/admin/Verifications.vue') },
       { path: 'analytics', name: 'AdminAnalytics', component: () => import('../pages/admin/Analytics.vue') },
-      { path: 'reports', name: 'AdminReports', component: () => import('../pages/admin/Reports.vue') },
-      { path: 'settings', name: 'AdminSettings', component: () => import('../pages/admin/Settings.vue') }
+      { path: 'reports', name: 'AdminReports', component: () => import('../pages/admin/Reports.vue') }
     ]
   },
 
@@ -62,15 +62,15 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const user = JSON.parse(localStorage.getItem('gts_user') || 'null')
 
-  // Redirect logged-in users away from auth pages
-  if (user && (to.path === '/' || to.path === '/login' || to.path === '/register')) {
+  // Redirect logged-in users away from auth pages (Welcome, Login, Register, Forgot Password)
+  if (user && (to.path === '/' || to.path === '/login' || to.path === '/register' || to.path === '/forgot-password')) {
     if (user.role === 'admin') return '/admin/dashboard'
     return '/customer/home'
   }
 
-  // Protect authenticated routes
+  // Protect authenticated routes — send to Welcome page first
   if (to.meta.requiresAuth && !user) {
-    return '/login'
+    return '/'
   }
 
   // Role-based access control

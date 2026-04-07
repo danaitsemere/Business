@@ -3,7 +3,7 @@ export const systemLogs = [
     id: 1,
     type: 'user_registered',
     icon: 'person_add',
-    message: 'New customer registered: Amir Hassan',
+    message: 'New customer registered: Abebe Kebede',
     severity: 'info',
     timestamp: '2026-04-06T14:30:00'
   },
@@ -11,7 +11,7 @@ export const systemLogs = [
     id: 2,
     type: 'business_pending',
     icon: 'store',
-    message: 'New business application: Atlas Construction Co.',
+    message: 'New business application: Anbessa Construction Co.',
     severity: 'warning',
     timestamp: '2026-04-06T13:15:00'
   },
@@ -19,7 +19,7 @@ export const systemLogs = [
     id: 3,
     type: 'request_created',
     icon: 'assignment',
-    message: 'New service request #8 from Amir Hassan',
+    message: 'New service request #8 from Abebe Kebede',
     severity: 'info',
     timestamp: '2026-04-06T12:00:00'
   },
@@ -27,7 +27,7 @@ export const systemLogs = [
     id: 4,
     type: 'business_approved',
     icon: 'check_circle',
-    message: 'Desert Rose Beauty has been approved',
+    message: 'Lucy Beauty & Wellness has been approved',
     severity: 'success',
     timestamp: '2026-04-06T11:45:00'
   },
@@ -35,7 +35,7 @@ export const systemLogs = [
     id: 5,
     type: 'user_registered',
     icon: 'person_add',
-    message: 'New customer registered: Nadia Khalil',
+    message: 'New customer registered: Meron Assefa',
     severity: 'info',
     timestamp: '2026-04-06T10:30:00'
   },
@@ -43,7 +43,7 @@ export const systemLogs = [
     id: 6,
     type: 'business_approved',
     icon: 'check_circle',
-    message: 'Sara Fashion House application approved',
+    message: 'Selam Fashion House application approved',
     severity: 'success',
     timestamp: '2026-04-06T09:20:00'
   },
@@ -67,7 +67,7 @@ export const systemLogs = [
     id: 9,
     type: 'business_rejected',
     icon: 'cancel',
-    message: 'Business application rejected: Fraudulent Goods LLC',
+    message: 'Business application rejected: Gebeya Fake Traders',
     severity: 'danger',
     timestamp: '2026-04-04T16:45:00'
   },
@@ -75,7 +75,7 @@ export const systemLogs = [
     id: 10,
     type: 'user_suspended',
     icon: 'block',
-    message: 'User Nadia Khalil suspended for review',
+    message: 'User Meron Assefa suspended for review',
     severity: 'danger',
     timestamp: '2026-04-04T14:00:00'
   }
@@ -90,18 +90,18 @@ export const platformStats = {
   activeServiceRequests: 2,
   pendingBusinesses: 2,
   pendingRequests: 3,
-  totalRevenue: 1274,
+  totalRevenue: 68500,
   monthlyGrowth: 18.5
 }
 
 export const revenueOverTime = [
-  { month: 'Sep', revenue: 490 },
-  { month: 'Oct', revenue: 680 },
-  { month: 'Nov', revenue: 870 },
-  { month: 'Dec', revenue: 1050 },
-  { month: 'Jan', revenue: 1320 },
-  { month: 'Feb', revenue: 1580 },
-  { month: 'Mar', revenue: 1840 }
+  { month: 'Sep', revenue: 24500 },
+  { month: 'Oct', revenue: 34000 },
+  { month: 'Nov', revenue: 43500 },
+  { month: 'Dec', revenue: 52500 },
+  { month: 'Jan', revenue: 66000 },
+  { month: 'Feb', revenue: 79000 },
+  { month: 'Mar', revenue: 92000 }
 ]
 
 export const userGrowth = [
@@ -134,11 +134,11 @@ export const topServices = [
 ]
 
 export const topBusinesses = [
-  { name: 'Hassan Electronics', views: 4790, inquiries: 162, products: 4, rating: 4.8 },
-  { name: 'Sara Fashion House', views: 3780, inquiries: 136, products: 4, rating: 4.9 },
-  { name: 'Desert Rose Beauty', views: 3200, inquiries: 112, products: 15, rating: 4.7 },
-  { name: 'Al Noor Organic Foods', views: 2150, inquiries: 89, products: 12, rating: 4.6 },
-  { name: 'Gulf Fitness Pro', views: 1890, inquiries: 67, products: 8, rating: 4.5 }
+  { name: 'Habesha Electronics', views: 4790, inquiries: 162, products: 4, rating: 4.8 },
+  { name: 'Selam Fashion House', views: 3780, inquiries: 136, products: 4, rating: 4.9 },
+  { name: 'Lucy Beauty & Wellness', views: 3200, inquiries: 112, products: 15, rating: 4.7 },
+  { name: 'Sheger Organic Foods', views: 2150, inquiries: 89, products: 12, rating: 4.6 },
+  { name: 'Ethio Fitness Pro', views: 1890, inquiries: 67, products: 8, rating: 4.5 }
 ]
 
 export const reportsList = [
@@ -151,11 +151,11 @@ export const reportsList = [
 
 export const systemSettings = {
   platformName: 'GTS Platform',
-  supportEmail: 'support@gts.com',
+  supportEmail: 'support@gts.et',
   maintenanceMode: false,
   enableNotifications: true,
   enableAnalytics: true,
-  defaultCurrency: 'USD',
-  defaultRegion: 'UAE',
+  defaultCurrency: 'ETB',
+  defaultRegion: 'Ethiopia',
   theme: 'dark'
 }

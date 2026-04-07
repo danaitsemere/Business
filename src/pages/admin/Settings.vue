@@ -29,8 +29,8 @@
           <div class="space-y-2">
             <label class="text-[0.688rem] font-black uppercase text-[#7C757E] tracking-widest pl-1">Currency</label>
             <select class="input-gts" v-model="localSettings.defaultCurrency">
+              <option value="ETB">ETB (Birr)</option>
               <option value="USD">USD ($)</option>
-              <option value="AED">AED (د.إ)</option>
               <option value="EUR">EUR (€)</option>
               <option value="GBP">GBP (£)</option>
             </select>
@@ -38,10 +38,10 @@
           <div class="space-y-2">
             <label class="text-[0.688rem] font-black uppercase text-[#7C757E] tracking-widest pl-1">Region</label>
             <select class="input-gts" v-model="localSettings.defaultRegion">
-              <option value="UAE">UAE</option>
-              <option value="SAU">Saudi Arabia</option>
-              <option value="QAT">Qatar</option>
-              <option value="KWT">Kuwait</option>
+              <option value="Ethiopia">Ethiopia</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Tanzania">Tanzania</option>
+              <option value="Uganda">Uganda</option>
             </select>
           </div>
         </div>
@@ -188,6 +188,7 @@ function handleReset() {
   localStorage.removeItem('gts_products')
   localStorage.removeItem('gts_requests')
   localStorage.removeItem('gts_settings')
+  localStorage.removeItem('gts_plans')
   showResetConfirm.value = false
   window.location.reload()
 }

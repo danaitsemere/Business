@@ -47,7 +47,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="product in filteredProducts" :key="product.id" class="border-b border-[#EEEAF2] last:border-0 hover:bg-[#F8F6FB] transition-colors">
+            <tr v-for="product in paginatedProducts" :key="product.id" class="border-b border-[#EEEAF2] last:border-0 hover:bg-[#F8F6FB] transition-colors">
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 bg-[#F8F6FB] rounded-xl flex items-center justify-center text-[#7C757E] border border-[#EEEAF2] shrink-0">
@@ -58,7 +58,7 @@
               </td>
               <td class="px-6 py-4 text-sm text-[#475569]">{{ getMerchantName(product.merchantId) }}</td>
               <td class="px-6 py-4"><span class="badge-primary">{{ product.category }}</span></td>
-              <td class="px-6 py-4 text-sm font-bold text-[#7630A3]">${{ product.price.toFixed(2) }}</td>
+              <td class="px-6 py-4 text-sm font-bold text-[#7630A3]">ETB {{ product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</td>
               <td class="px-6 py-4 text-sm text-[#475569]">{{ product.views.toLocaleString() }}</td>
               <td class="px-6 py-4">
                 <span :class="product.status === 'active'
@@ -81,10 +81,6 @@
                     @click="openEditModal(product)" title="Edit">
                     <span class="material-icons-round text-lg">edit</span>
                   </button>
-                  <button class="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"
-                    @click="adminStore.deleteProduct(product.id)" title="Delete">
-                    <span class="material-icons-round text-lg">delete</span>
-                  </button>
                 </div>
               </td>
             </tr>
@@ -97,6 +93,24 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <!-- Pagination -->
+    <div v-if="totalPages > 1" class="flex items-center justify-center gap-2 mt-6">
+      <button class="w-10 h-10 rounded-xl border border-[#EEEAF2] flex items-center justify-center text-[#7C757E] hover:border-[#7630A3] hover:text-[#7630A3] transition-all disabled:opacity-30"
+        :disabled="currentPage === 1" @click="currentPage--">
+        <span class="material-icons-round text-lg">chevron_left</span>
+      </button>
+      <button v-for="page in totalPages" :key="page"
+        class="w-10 h-10 rounded-xl text-sm font-black flex items-center justify-center transition-all"
+        :class="currentPage === page ? 'bg-[#7630A3] text-white shadow-soft' : 'border border-[#EEEAF2] text-[#475569] hover:border-[#7630A3]'"
+        @click="currentPage = page">
+        {{ page }}
+      </button>
+      <button class="w-10 h-10 rounded-xl border border-[#EEEAF2] flex items-center justify-center text-[#7C757E] hover:border-[#7630A3] hover:text-[#7630A3] transition-all disabled:opacity-30"
+        :disabled="currentPage === totalPages" @click="currentPage++">
+        <span class="material-icons-round text-lg">chevron_right</span>
+      </button>
     </div>
 
     <!-- Add/Edit Product Modal -->
@@ -115,8 +129,9 @@
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-2">
-              <label class="text-[0.688rem] font-black uppercase text-[#7C757E] tracking-widest pl-1">Price (USD)</label>
-              <input type="number" step="0.01" class="input-gts" v-model.number="productForm.price" placeholder="0.00">
+              <label class="text-[0.688rem] font-black uppercase text-[#7C757E] tracking-widest pl-1">Price (ETB)</label>
+              <input type="number" step="0.01" min="0" class="input-gts" v-model.number="productForm.price" placeholder="0.00"
+                @keydown="handlePriceKeydown">
             </div>
             <div class="space-y-2">
               <label class="text-[0.688rem] font-black uppercase text-[#7C757E] tracking-widest pl-1">Category</label>
@@ -153,6 +168,8 @@ const searchQuery = ref('')
 const statusFilter = ref('')
 const showAddModal = ref(false)
 const editProduct = ref(null)
+const currentPage = ref(1)
+const perPage = 10
 
 const productForm = ref({
   name: '', price: 0, category: 'Electronics', merchantId: 1
@@ -182,6 +199,12 @@ const filteredProducts = computed(() => {
   return list
 })
 
+const totalPages = computed(() => Math.ceil(filteredProducts.value.length / perPage))
+const paginatedProducts = computed(() => {
+  const start = (currentPage.value - 1) * perPage
+  return filteredProducts.value.slice(start, start + perPage)
+})
+
 function openEditModal(product) {
   editProduct.value = product
   productForm.value = { name: product.name, price: product.price, category: product.category, merchantId: product.merchantId }
@@ -201,4 +224,21 @@ function handleSaveProduct() {
   }
   closeModal()
 }
+
+// Prevent decimal increments on arrow keys - increment by whole numbers
+function handlePriceKeydown(e) {
+  if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+    e.preventDefault()
+    const current = productForm.value.price || 0
+    if (e.key === 'ArrowUp') {
+      productForm.value.price = Math.floor(current) + 1
+    } else {
+      productForm.value.price = Math.max(0, Math.ceil(current) - 1)
+    }
+  }
+}
 </script>
+
+<style scoped>
+.shadow-soft { box-shadow: 0 4px 20px -4px rgba(118, 48, 163, 0.1); }
+</style>

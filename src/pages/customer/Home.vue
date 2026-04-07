@@ -101,9 +101,9 @@
 
             <div class="mt-auto flex items-end justify-between pt-2 border-t border-[#F5F3F7]">
               <div>
-                <span v-if="product.salePrice" class="block text-[0.45rem] text-slate-400 line-through font-bold mb-0.5">${{ product.price }}</span>
+                <span v-if="product.salePrice" class="block text-[0.45rem] text-slate-400 line-through font-bold mb-0.5">ETB {{ product.price.toLocaleString() }}</span>
                 <span class="text-[0.938rem] font-black text-[#1A1225] tracking-tight">
-                  <span class="text-primary-500 text-[0.625rem] font-bold">$</span>{{ (product.salePrice || product.price).toLocaleString() }}
+                  <span class="text-primary-500 text-[0.625rem] font-bold">ETB</span> {{ (product.salePrice || product.price).toLocaleString() }}
                 </span>
               </div>
               <span class="material-icons-round text-slate-300 text-sm group-hover:text-primary-500 group-hover:translate-x-0.5 transition-all">arrow_forward</span>
@@ -220,7 +220,7 @@
               <div class="flex flex-col border-l border-[#EEEAF2] pl-6">
                 <span class="text-[0.625rem] text-slate-400 font-bold uppercase tracking-wider mb-1 px-1 block">Location</span>
                 <span class="text-sm font-black text-[#1A1225] truncate">
-                  {{ biz.location || 'San Francisco, CA' }}
+                  {{ biz.location || 'Addis Ababa, Ethiopia' }}
                 </span>
               </div>
             </div>
@@ -289,7 +289,7 @@
               <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
                 <span class="flex items-center gap-1"><span class="material-icons-round text-amber-400 text-sm">star</span> {{ provider.rating }}</span>
                 <span class="flex items-center gap-1"><span class="material-icons-round text-sm">schedule</span> {{ provider.responseTime }}</span>
-                <span v-if="provider.price" class="flex items-center gap-1 text-primary-500"><span class="material-icons-round text-sm">payments</span> From ${{ provider.price }}</span>
+                <span v-if="provider.price" class="flex items-center gap-1 text-primary-500"><span class="material-icons-round text-sm">payments</span> From ETB {{ provider.price.toLocaleString() }}</span>
               </div>
             </div>
             <button @click="openRequestForm(provider)" class="btn-gts-primary px-6 py-3 rounded-xl text-sm shrink-0">
@@ -325,7 +325,7 @@
                 <input v-model="requestForm.location" type="text" class="input-gts" placeholder="e.g. Mekelle, Tigray">
               </div>
               <div class="space-y-2">
-                <label class="text-[0.625rem] font-black uppercase text-slate-400 tracking-widest pl-1">Estimated Budget (USD)</label>
+                <label class="text-[0.625rem] font-black uppercase text-slate-400 tracking-widest pl-1">Estimated Budget (ETB)</label>
                 <input v-model="requestForm.budget" type="number" class="input-gts" placeholder="0.00" step="0.01">
               </div>
               <div v-if="requestSubmitted" class="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-tertiary-300/10 border border-tertiary-300/30 text-tertiary-300">
@@ -402,29 +402,29 @@ const serviceTypes = [
 // Mock providers per service type
 const serviceProviders = {
   'Delivery': [
-    { name: 'FastShip Ltd', desc: 'Express same-day delivery across all major cities', rating: '4.9', responseTime: '< 1 hour', price: 25 },
-    { name: 'GreenRoute Logistics', desc: 'Eco-friendly delivery solutions with real-time tracking', rating: '4.7', responseTime: '2-4 hours', price: 15 },
-    { name: 'SwiftPack Express', desc: 'Bulk & fragile item specialists with insurance coverage', rating: '4.8', responseTime: '< 2 hours', price: 30 }
+    { name: 'Anbessa Logistics', desc: 'Express same-day delivery across all major Ethiopian cities', rating: '4.9', responseTime: '< 1 hour', price: 2500 },
+    { name: 'Selam Express', desc: 'Eco-friendly delivery solutions with real-time tracking', rating: '4.7', responseTime: '2-4 hours', price: 1500 },
+    { name: 'Walia Courier', desc: 'Bulk & fragile item specialists with insurance coverage', rating: '4.8', responseTime: '< 2 hours', price: 3000 }
   ],
   'Payment Processing': [
-    { name: 'PayFlow Systems', desc: 'Full-stack payment gateway integration for e-commerce', rating: '4.8', responseTime: '24 hours', price: 150 },
-    { name: 'SecurePay Solutions', desc: 'PCI-compliant payment processing with fraud detection', rating: '4.6', responseTime: '48 hours', price: 200 }
+    { name: 'TelePay Solutions', desc: 'Full-stack payment gateway integration for TeleBirr & CBE Birr', rating: '4.8', responseTime: '24 hours', price: 15000 },
+    { name: 'Addis Pay Systems', desc: 'PCI-compliant payment processing with fraud detection', rating: '4.6', responseTime: '48 hours', price: 20000 }
   ],
   'Marketing': [
-    { name: 'BrandWave Digital', desc: 'Social media management & paid advertising campaigns', rating: '4.7', responseTime: '24 hours', price: 300 },
-    { name: 'ViralReach Agency', desc: 'Content marketing & influencer partnerships', rating: '4.5', responseTime: '48 hours', price: 500 }
+    { name: 'Zemen Digital', desc: 'Social media management & paid advertising campaigns', rating: '4.7', responseTime: '24 hours', price: 30000 },
+    { name: 'Habesha Media', desc: 'Content marketing & influencer partnerships', rating: '4.5', responseTime: '48 hours', price: 50000 }
   ],
   'Photography': [
-    { name: 'LensArch Studio', desc: 'High-end product photography with post-processing', rating: '4.9', responseTime: '< 3 hours', price: 100 },
-    { name: 'PixelCraft Pro', desc: 'E-commerce photography & 360° product views', rating: '4.8', responseTime: '24 hours', price: 75 }
+    { name: 'Lalibela Studio', desc: 'High-end product photography with post-processing', rating: '4.9', responseTime: '< 3 hours', price: 10000 },
+    { name: 'Abyssinia Lens', desc: 'E-commerce photography & 360° product views', rating: '4.8', responseTime: '24 hours', price: 7500 }
   ],
   'Web Development': [
-    { name: 'CodeForge Labs', desc: 'Full-stack web development & custom CMS solutions', rating: '4.8', responseTime: '24 hours', price: 1000 },
-    { name: 'PixelPerfect Dev', desc: 'Frontend development & UI/UX design', rating: '4.6', responseTime: '48 hours', price: 800 }
+    { name: 'Axum Code Labs', desc: 'Full-stack web development & custom CMS solutions', rating: '4.8', responseTime: '24 hours', price: 100000 },
+    { name: 'Sheger Dev Studio', desc: 'Frontend development & UI/UX design', rating: '4.6', responseTime: '48 hours', price: 80000 }
   ],
   'Consulting': [
-    { name: 'StratEdge Partners', desc: 'Business strategy & digital transformation consulting', rating: '4.9', responseTime: '24 hours', price: 200 },
-    { name: 'GrowthMind Advisory', desc: 'Startup mentorship & market analysis', rating: '4.7', responseTime: '48 hours', price: 150 }
+    { name: 'Abyssinia Consulting', desc: 'Business strategy & digital transformation consulting', rating: '4.9', responseTime: '24 hours', price: 20000 },
+    { name: 'Ethio Growth Advisory', desc: 'Startup mentorship & market analysis', rating: '4.7', responseTime: '48 hours', price: 15000 }
   ]
 }
 

@@ -22,10 +22,10 @@
           </div>
           <div class="flex flex-col gap-1.5 mb-5">
             <label class="text-sm font-medium text-[#b8b0c4]">Location</label>
-            <input type="text" class="input-gts" v-model="form.location" placeholder="e.g. Dubai, Business Bay" required>
+            <input type="text" class="input-gts" v-model="form.location" placeholder="e.g. Addis Ababa, Bole" required>
           </div>
           <div class="flex flex-col gap-1.5 mb-5">
-            <label class="text-sm font-medium text-[#b8b0c4]">Estimated Budget (USD)</label>
+            <label class="text-sm font-medium text-[#b8b0c4]">Estimated Budget (ETB)</label>
             <input type="number" class="input-gts" v-model="form.estimatedCost" placeholder="0.00" step="0.01">
           </div>
           <div v-if="submitted" class="flex items-center gap-2.5 px-5 py-3 rounded-lg text-sm font-medium mb-5 bg-green-500/10 border border-green-500/30 text-green-400">

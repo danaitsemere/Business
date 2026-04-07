@@ -88,9 +88,9 @@
               
               <div class="mt-auto flex items-end justify-between pt-2 border-t border-[#F5F3F7]">
                 <div>
-                  <span v-if="product.salePrice" class="block text-[0.45rem] text-slate-400 line-through font-bold mb-0.5">${{ product.price }}</span>
+                  <span v-if="product.salePrice" class="block text-[0.45rem] text-slate-400 line-through font-bold mb-0.5">ETB {{ product.price }}</span>
                   <span class="text-[0.938rem] font-black text-[#1A1225] tracking-tight">
-                    <span class="text-[#7630A3] text-[0.625rem] font-bold">$</span>{{ (product.salePrice || product.price).toLocaleString() }}
+                    <span class="text-[#7630A3] text-[0.625rem] font-bold">ETB</span> {{ (product.salePrice || product.price).toLocaleString() }}
                   </span>
                 </div>
                 <span class="material-icons-round text-slate-300 text-sm group-hover:text-[#7630A3] transition-all">arrow_forward</span>
@@ -160,7 +160,7 @@
                   </div>
                   <div class="flex flex-col">
                      <span class="text-[0.625rem] text-slate-400 font-bold uppercase mb-1">Email</span>
-                     <span class="text-sm font-black text-[#1A1225]">{{ business.email || 'support@curator.com' }}</span>
+                     <span class="text-sm font-black text-[#1A1225]">{{ business.email || 'support@gts.et' }}</span>
                   </div>
                   <div class="flex flex-col">
                      <span class="text-[0.625rem] text-slate-400 font-bold uppercase mb-1">Location</span>
@@ -254,11 +254,11 @@ const companyValues = [
 ]
 
 const fakeReviews = [
-  { id: 1, name: 'Ahmad Khalid', date: 'Mar 28, 2026', rating: 5, comment: `Excellent experience with ${business.value?.name || 'this store'}. Products arrived on time and in perfect condition. Customer service was incredibly helpful and responsive.` },
-  { id: 2, name: 'Maria Santos', date: 'Mar 15, 2026', rating: 4, comment: 'Great quality products and fair pricing. The only thing I\'d improve is faster shipping options. Otherwise, very satisfied with my purchase.' },
-  { id: 3, name: 'David Park', date: 'Mar 5, 2026', rating: 5, comment: 'Been a loyal customer for over a year now. Consistently impressed by the quality and attention to detail. Highly recommend to anyone looking for premium products.' },
-  { id: 4, name: 'Aisha Mohammed', date: 'Feb 20, 2026', rating: 5, comment: 'Absolutely love shopping here! The product selection is curated perfectly. Every item I\'ve purchased has exceeded expectations.' },
-  { id: 5, name: 'Carlos Rivera', date: 'Feb 10, 2026', rating: 4, comment: 'Solid store with good products. Pricing is competitive and the verified badge gives me confidence in the authenticity of purchases.' }
+  { id: 1, name: 'Kidist Tesfaye', date: 'Mar 28, 2026', rating: 5, comment: `Excellent experience with ${business.value?.name || 'this store'}. Products arrived on time and in perfect condition. Customer service was incredibly helpful and responsive.` },
+  { id: 2, name: 'Bereket Mulugeta', date: 'Mar 15, 2026', rating: 4, comment: 'Great quality products and fair pricing. The only thing I\'d improve is faster shipping options. Otherwise, very satisfied with my purchase.' },
+  { id: 3, name: 'Hanna Gebremedhin', date: 'Mar 5, 2026', rating: 5, comment: 'Been a loyal customer for over a year now. Consistently impressed by the quality and attention to detail. Highly recommend to anyone looking for premium products.' },
+  { id: 4, name: 'Yonas Abera', date: 'Feb 20, 2026', rating: 5, comment: 'Absolutely love shopping here! The product selection is curated perfectly. Every item I\'ve purchased has exceeded expectations.' },
+  { id: 5, name: 'Rahel Desta', date: 'Feb 10, 2026', rating: 4, comment: 'Solid store with good products. Pricing is competitive and the verified badge gives me confidence in the authenticity of purchases.' }
 ]
 </script>
 

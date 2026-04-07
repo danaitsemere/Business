@@ -25,11 +25,17 @@
           </div>
 
           <template v-if="!isEditing">
-             <h2 class="font-heading text-2xl font-black text-[#1A1225] mb-8">{{ user?.fullName || 'Julian Sterling' }}</h2>
-             <button @click="isEditing = true" class="btn-gts-primary w-full py-4 rounded-xl flex items-center justify-center gap-2 group shadow-soft transition-all active:scale-95">
-               <span class="material-icons-round text-lg group-hover:rotate-12 transition-transform">edit</span>
-               Edit Profile
-             </button>
+             <h2 class="font-heading text-2xl font-black text-[#1A1225] mb-8">{{ user?.fullName || 'Kalkidan Abera' }}</h2>
+             <div class="space-y-3">
+               <button @click="isEditing = true" class="btn-gts-primary w-full py-4 rounded-xl flex items-center justify-center gap-2 group shadow-soft transition-all active:scale-95">
+                 <span class="material-icons-round text-lg group-hover:rotate-12 transition-transform">edit</span>
+                 Edit Profile
+               </button>
+               <button @click="handleSignOut" class="w-full py-4 rounded-xl border-2 border-red-100 text-red-500 font-black text-sm flex items-center justify-center gap-2 hover:bg-red-50 hover:border-red-200 transition-all active:scale-95 group">
+                 <span class="material-icons-round text-lg group-hover:-rotate-6 transition-transform">logout</span>
+                 Sign Out
+               </button>
+             </div>
           </template>
           
           <template v-else>
@@ -54,17 +60,17 @@
              <div class="space-y-2">
                 <span class="text-[0.625rem] font-extrabold text-neutral-500 uppercase tracking-widest">Email Address</span>
                 <input v-if="isEditing" v-model="editForm.email" type="email" class="input-gts text-xs py-2">
-                <p v-else class="text-sm font-black text-[#1A1225] truncate">{{ user?.email || 'julian.sterling@techcurator.com' }}</p>
+                <p v-else class="text-sm font-black text-[#1A1225] truncate">{{ user?.email || 'kalkidan@gts.et' }}</p>
              </div>
              <div class="space-y-2">
                 <span class="text-[0.625rem] font-extrabold text-neutral-500 uppercase tracking-widest">Phone Extension</span>
                 <input v-if="isEditing" v-model="editForm.phone" type="text" class="input-gts text-xs py-2">
-                <p v-else class="text-sm font-black text-[#1A1225]">{{ user?.phone || '+1 (555) 234-8901' }}</p>
+                <p v-else class="text-sm font-black text-[#1A1225]">{{ user?.phone || '+251912345678' }}</p>
              </div>
              <div class="space-y-2">
                 <span class="text-[0.625rem] font-extrabold text-neutral-500 uppercase tracking-widest">Terminal Location</span>
                 <input v-if="isEditing" v-model="editForm.location" type="text" class="input-gts text-xs py-2">
-                <p v-else class="text-sm font-black text-[#1A1225]">{{ user?.location || 'San Francisco, CA' }}</p>
+                <p v-else class="text-sm font-black text-[#1A1225]">{{ user?.location || 'Addis Ababa, Ethiopia' }}</p>
              </div>
           </div>
         </div>
@@ -128,7 +134,7 @@
               <div class="flex items-center gap-6 text-xs font-bold text-slate-400 mb-4">
                 <span class="flex items-center gap-1"><span class="material-icons-round text-sm">calendar_today</span> {{ formatDate(req.createdAt) }}</span>
                 <span v-if="req.location" class="flex items-center gap-1"><span class="material-icons-round text-sm">location_on</span> {{ req.location }}</span>
-                <span v-if="req.estimatedCost" class="flex items-center gap-1 text-primary-500"><span class="material-icons-round text-sm">payments</span> ${{ req.estimatedCost }}</span>
+                <span v-if="req.estimatedCost" class="flex items-center gap-1 text-primary-500"><span class="material-icons-round text-sm">payments</span> ETB {{ req.estimatedCost.toLocaleString() }}</span>
               </div>
 
               <!-- Timeline -->
@@ -177,12 +183,12 @@
                 <div v-for="item in order.items" :key="item.id" class="flex items-center gap-3 text-sm">
                   <span class="text-slate-400 font-bold">{{ item.quantity }}×</span>
                   <span class="font-black text-[#1A1225]">{{ item.name }}</span>
-                  <span class="text-primary-500 font-bold ml-auto">${{ item.subtotal?.toLocaleString() }}</span>
+                  <span class="text-primary-500 font-bold ml-auto">ETB {{ item.subtotal?.toLocaleString() }}</span>
                 </div>
               </div>
 
               <div class="flex items-center justify-between border-t border-[#EEEAF2] pt-4">
-                <span class="text-sm font-black text-[#1A1225]">Total: ${{ order.total?.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
+                <span class="text-sm font-black text-[#1A1225]">Total: ETB {{ order.total?.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
                 
                 <!-- Rating -->
                 <div v-if="!order.rated" class="flex items-center gap-2">
@@ -214,12 +220,19 @@
 
 <script setup>
 import { ref, computed, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../store/authStore.js'
 import { useCustomerStore } from '../../store/customerStore.js'
 
+const router = useRouter()
 const authStore = useAuthStore()
 const customerStore = useCustomerStore()
 const user = computed(() => authStore.currentUser)
+
+function handleSignOut() {
+  authStore.logout()
+  router.push('/')
+}
 
 const isEditing = ref(false)
 const fileInput = ref(null)
@@ -247,12 +260,12 @@ const mockRequests = [
   {
     id: 'mock-1',
     serviceType: 'Delivery',
-    providerName: 'FastShip Ltd',
-    description: 'Express delivery of hardware components from warehouse to office location in Business Bay.',
+    providerName: 'Anbessa Logistics',
+    description: 'Express delivery of hardware components from warehouse to office location in Bole.',
     status: 'accepted',
     createdAt: '2026-04-01T10:00:00Z',
-    location: 'Dubai, Business Bay',
-    estimatedCost: 45,
+    location: 'Addis Ababa, Bole',
+    estimatedCost: 4500,
     timeline: [
       { status: 'submitted', date: '2026-04-01T10:00:00Z', label: 'Submitted' },
       { status: 'pending', date: '2026-04-01T10:30:00Z', label: 'Pending' },
@@ -262,12 +275,12 @@ const mockRequests = [
   {
     id: 'mock-2',
     serviceType: 'Web Development',
-    providerName: 'CodeForge Labs',
+    providerName: 'Axum Code Labs',
     description: 'Full-stack e-commerce platform development with payment integration.',
     status: 'in-progress',
     createdAt: '2026-03-28T14:00:00Z',
     location: 'Remote',
-    estimatedCost: 2500,
+    estimatedCost: 250000,
     timeline: [
       { status: 'submitted', date: '2026-03-28T14:00:00Z', label: 'Submitted' },
       { status: 'accepted', date: '2026-03-28T16:00:00Z', label: 'Accepted' },
@@ -277,12 +290,12 @@ const mockRequests = [
   {
     id: 'mock-3',
     serviceType: 'Photography',
-    providerName: 'LensArch Studio',
+    providerName: 'Lalibela Studio',
     description: 'Professional product photography for new electronics line (20 products).',
     status: 'completed',
     createdAt: '2026-03-20T09:00:00Z',
-    location: 'Dubai Studio City',
-    estimatedCost: 350,
+    location: 'Addis Ababa, Kazanchis',
+    estimatedCost: 35000,
     timeline: [
       { status: 'submitted', date: '2026-03-20T09:00:00Z', label: 'Submitted' },
       { status: 'accepted', date: '2026-03-20T10:00:00Z', label: 'Accepted' },
@@ -295,10 +308,10 @@ const mockRequests = [
 onMounted(() => {
    if (user.value) {
       editForm.value = {
-         fullName: user.value.fullName || 'Julian Sterling',
-         email: user.value.email || 'julian.sterling@techcurator.com',
-         phone: user.value.phone || '+1 (555) 234-8901',
-         location: user.value.location || 'San Francisco, CA'
+         fullName: user.value.fullName || 'Kalkidan Abera',
+         email: user.value.email || 'kalkidan@gts.et',
+         phone: user.value.phone || '+251912345678',
+         location: user.value.location || 'Addis Ababa, Ethiopia'
       }
    }
    profileImage.value = localStorage.getItem('gts_profile_img')

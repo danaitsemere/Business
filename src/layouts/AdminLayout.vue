@@ -58,11 +58,7 @@
         </div>
         
         <div class="flex items-center gap-4">
-          <div class="relative cursor-pointer text-[#475569] p-3 bg-[#F8F6FB] rounded-xl hover:text-[#7630A3] transition-colors border border-[#EEEAF2] group">
-            <span class="material-icons-round text-xl group-hover:rotate-12 transition-transform">notifications</span>
-            <span v-if="pendingCount > 0" class="absolute top-2 right-2 w-2.5 h-2.5 bg-[#7630A3] rounded-full border-2 border-white animate-pulse"></span>
-          </div>
-          <div class="w-12 h-12 rounded-2xl bg-[#7630A3] flex items-center justify-center text-white font-black shadow-soft cursor-pointer hover:brightness-110 transition-all" @click="$router.push('/admin/settings')">
+          <div class="w-12 h-12 rounded-2xl bg-[#7630A3] flex items-center justify-center text-white font-black shadow-soft cursor-pointer hover:brightness-110 transition-all">
              SA
           </div>
         </div>
@@ -71,12 +67,23 @@
       <div class="p-10 min-h-screen">
         <router-view />
       </div>
-
-      <!-- Admin Footer -->
-      <footer class="p-10 border-t border-[#EEEAF2] text-center bg-white">
-         <p class="text-[0.625rem] font-black text-[#7C757E] uppercase tracking-[0.3em]">© 2026 GTS Platform • Admin Panel</p>
-      </footer>
     </main>
+
+    <!-- Global Toast -->
+    <Transition name="toast">
+      <div v-if="adminStore.toast.show" class="fixed bottom-6 right-6 z-[300] flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl border text-sm font-bold animate-fade-in"
+        :class="{
+          'bg-[#64D2B1] border-[#64D2B1]/30 text-white': adminStore.toast.type === 'success',
+          'bg-amber-500 border-amber-400 text-white': adminStore.toast.type === 'warning',
+          'bg-red-500 border-red-400 text-white': adminStore.toast.type === 'error',
+          'bg-[#7630A3] border-[#7630A3]/30 text-white': adminStore.toast.type === 'info'
+        }">
+        <span class="material-icons-round text-lg">
+          {{ adminStore.toast.type === 'success' ? 'check_circle' : adminStore.toast.type === 'warning' ? 'warning' : adminStore.toast.type === 'error' ? 'error' : 'info' }}
+        </span>
+        {{ adminStore.toast.message }}
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -92,8 +99,6 @@ const authStore = useAuthStore()
 const adminStore = useAdminStore()
 const sidebarCollapsed = ref(false)
 
-const pendingCount = computed(() => adminStore.pendingBusinesses.length + adminStore.pendingRequests.length)
-
 const navItems = computed(() => [
   { path: '/admin/dashboard', icon: 'dashboard', label: 'Overview' },
   { path: '/admin/users', icon: 'people', label: 'Users' },
@@ -102,8 +107,7 @@ const navItems = computed(() => [
   { path: '/admin/service-requests', icon: 'assignment', label: 'Service Requests', badge: adminStore.pendingRequests.length || null },
   { path: '/admin/verifications', icon: 'verified_user', label: 'Verifications', badge: adminStore.pendingBusinesses.length || null },
   { path: '/admin/analytics', icon: 'analytics', label: 'Analytics' },
-  { path: '/admin/reports', icon: 'description', label: 'Reports' },
-  { path: '/admin/settings', icon: 'settings', label: 'Settings' }
+  { path: '/admin/reports', icon: 'description', label: 'Reports' }
 ])
 
 const currentPageTitle = computed(() => {
@@ -119,4 +123,10 @@ function handleLogout() { authStore.logout(); router.push('/') }
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: #7630A320; border-radius: 10px; }
+.toast-enter-active { animation: slideUp 0.3s ease-out; }
+.toast-leave-active { animation: slideUp 0.3s ease-in reverse; }
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
 </style>

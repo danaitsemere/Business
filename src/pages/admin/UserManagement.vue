@@ -84,11 +84,6 @@
                     @click="handleSuspend(user.id)" title="Suspend">
                     <span class="material-icons-round text-lg">block</span>
                   </button>
-                  <button v-if="user.role !== 'admin'"
-                    class="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"
-                    @click="confirmDelete(user)" title="Delete">
-                    <span class="material-icons-round text-lg">delete</span>
-                  </button>
                 </div>
               </td>
             </tr>
@@ -102,21 +97,6 @@
         </table>
       </div>
     </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div v-if="deleteModal" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="deleteModal = null">
-      <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-sm animate-scale-in text-center shadow-2xl">
-        <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span class="material-icons-round text-3xl text-red-500">warning</span>
-        </div>
-        <h3 class="font-heading text-xl font-black text-[#1A1225] mb-2">Delete User?</h3>
-        <p class="text-sm text-[#475569] mb-6">Are you sure you want to remove <strong>{{ deleteModal?.fullName }}</strong>? This cannot be undone.</p>
-        <div class="flex gap-3">
-          <button class="flex-1 py-3 rounded-xl bg-[#F8F6FB] text-[#475569] font-bold hover:bg-[#EEEAF2] transition-colors" @click="deleteModal = null">Cancel</button>
-          <button class="flex-1 py-3 rounded-xl bg-red-500 text-white font-bold hover:bg-red-600 transition-colors" @click="handleDelete">Delete</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -127,7 +107,6 @@ import { useAdminStore } from '../../store/adminStore.js'
 const adminStore = useAdminStore()
 const activeTab = ref('all')
 const searchQuery = ref('')
-const deleteModal = ref(null)
 
 const statusTabs = computed(() => [
   { value: 'all', label: 'All Users', count: adminStore.allUsers.length },
@@ -150,13 +129,6 @@ const filteredUsers = computed(() => {
 
 function handleActivate(id) { adminStore.activateUser(id) }
 function handleSuspend(id) { adminStore.suspendUser(id) }
-function confirmDelete(user) { deleteModal.value = user }
-function handleDelete() {
-  if (deleteModal.value) {
-    adminStore.deleteUser(deleteModal.value.id)
-    deleteModal.value = null
-  }
-}
 </script>
 
 <style scoped>

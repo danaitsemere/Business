@@ -16,9 +16,9 @@
       </select>
       <select class="select-gts w-[200px]" v-model="locationFilter">
         <option value="">All Locations</option>
-        <option value="Dubai">Dubai</option>
-        <option value="Abu Dhabi">Abu Dhabi</option>
-        <option value="Sharjah">Sharjah</option>
+        <option value="Addis Ababa">Addis Ababa</option>
+        <option value="Hawassa">Hawassa</option>
+        <option value="Mekelle">Mekelle</option>
       </select>
     </div>
 

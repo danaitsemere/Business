@@ -42,8 +42,8 @@
               <p class="text-xs text-slate-400 font-bold">{{ item.details?.category }}</p>
             </div>
             <div class="text-right shrink-0">
-              <p class="text-xs text-slate-400 font-bold mb-0.5">{{ item.quantity }} × ${{ (item.details?.salePrice || item.details?.price || 0).toLocaleString() }}</p>
-              <p class="font-black text-[#1A1225]">${{ ((item.details?.salePrice || item.details?.price || 0) * item.quantity).toLocaleString() }}</p>
+              <p class="text-xs text-slate-400 font-bold mb-0.5">{{ item.quantity }} × ETB {{ (item.details?.salePrice || item.details?.price || 0).toLocaleString() }}</p>
+              <p class="font-black text-[#1A1225]">ETB {{ ((item.details?.salePrice || item.details?.price || 0) * item.quantity).toLocaleString() }}</p>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="border-t border-[#EEEAF2] pt-6 space-y-3">
           <div class="flex justify-between text-sm">
             <span class="text-slate-400 font-bold">Subtotal</span>
-            <span class="font-black text-[#1A1225]">${{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
+            <span class="font-black text-[#1A1225]">ETB {{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
           </div>
           <div class="flex justify-between text-sm">
             <span class="text-slate-400 font-bold">Shipping</span>
@@ -60,7 +60,7 @@
           </div>
           <div class="flex justify-between text-lg border-t border-[#EEEAF2] pt-4">
             <span class="font-black text-[#1A1225]">Total</span>
-            <span class="font-black text-primary-500">${{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
+            <span class="font-black text-primary-500">ETB {{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
           </div>
           <div class="space-y-2">
             <label class="text-[0.625rem] font-black uppercase text-slate-400 tracking-widest pl-1">Cardholder Name</label>
-            <input type="text" class="input-gts" placeholder="John Doe" v-model="cardForm.name">
+            <input type="text" class="input-gts" placeholder="Abebe Kebede" v-model="cardForm.name">
           </div>
         </div>
 
@@ -125,7 +125,7 @@
         </div>
 
         <div class="flex items-center justify-between border-t border-[#EEEAF2] pt-6 mt-8">
-          <span class="font-black text-lg text-[#1A1225]">Total: ${{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
+          <span class="font-black text-lg text-[#1A1225]">Total: ETB {{ cartTotal.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
           <div class="flex items-center gap-1 text-tertiary-300 text-xs font-black">
             <span class="material-icons-round text-sm">lock</span> Secure Payment
           </div>
@@ -155,7 +155,7 @@
         </div>
         <h2 class="font-heading text-3xl font-black text-[#1A1225] mb-3">Order Confirmed!</h2>
         <p class="text-slate-500 font-medium text-lg mb-2">Thank you for your purchase.</p>
-        <p class="text-slate-400 text-sm font-bold mb-10">Order #{{ placedOrder?.id }} • ${{ cartTotalSnapshot.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</p>
+        <p class="text-slate-400 text-sm font-bold mb-10">Order #{{ placedOrder?.id }} • ETB {{ cartTotalSnapshot.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</p>
 
         <!-- Rating Section -->
         <div class="max-w-md mx-auto bg-[#F8F6FB] rounded-2xl p-8">

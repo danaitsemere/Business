@@ -28,11 +28,11 @@ export const productPerformance = [
 ]
 
 export const customerDemographics = [
-  { region: 'Dubai', percentage: 42 },
-  { region: 'Abu Dhabi', percentage: 28 },
-  { region: 'Sharjah', percentage: 15 },
-  { region: 'Other Emirates', percentage: 10 },
-  { region: 'International', percentage: 5 }
+  { region: 'Addis Ababa', percentage: 42 },
+  { region: 'Mekelle', percentage: 20 },
+  { region: 'Hawassa', percentage: 15 },
+  { region: 'Bahir Dar', percentage: 13 },
+  { region: 'Dire Dawa', percentage: 10 }
 ]
 
 export const jobsOverTime = [
