@@ -1,22 +1,17 @@
 <template>
   <div class="animate-fade-in max-w-7xl mx-auto py-8">
-    <!-- Back to Home -->
     <button @click="$router.push('/customer/home')" class="flex items-center gap-2 text-primary-500 font-black text-sm hover:gap-3 transition-all mb-8">
       <span class="material-icons-round text-base">arrow_back</span> Back to Home
     </button>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      
-      <!-- Left Sidebar Column: Profile Summary & Image Upload -->
       <aside class="lg:col-span-4 space-y-6 sticky top-28">
         <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-soft text-center group">
-          <!-- Profile Avatar with Upload Functionality -->
           <div class="relative w-40 h-40 mx-auto mb-8 cursor-pointer overflow-hidden rounded-3xl border-4 border-[#F8F6FB] group" @click="triggerFileInput">
             <div class="w-full h-full bg-[#1A1225] flex items-center justify-center text-white font-black text-5xl uppercase transition-transform duration-500 group-hover:scale-110">
                <img v-if="profileImage" :src="profileImage" class="w-full h-full object-cover">
                <span v-else>{{ user?.fullName?.charAt(0) || 'J' }}</span>
             </div>
-            <!-- Overlay for Upload -->
             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300 backdrop-blur-[2px]">
                <span class="material-icons-round text-3xl mb-1">cloud_upload</span>
                <span class="text-[0.625rem] font-black uppercase tracking-widest">Update Photo</span>
@@ -48,8 +43,6 @@
              </div>
           </template>
         </div>
-
-        <!-- Contact Details (Editable) -->
         <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-soft">
           <div class="flex items-center gap-3 mb-8">
              <span class="material-icons-round text-primary-500">contact_mail</span>
@@ -75,8 +68,6 @@
           </div>
         </div>
       </aside>
-
-      <!-- Right Main Column: Service Requests -->
       <main class="lg:col-span-8 space-y-8">
         <div class="bg-white rounded-[2.5rem] p-10 lg:p-14 border border-[#EEEAF2] shadow-soft min-h-[600px]">
           <div class="flex items-center justify-between mb-10">
@@ -84,7 +75,7 @@
                <h3 class="font-heading text-2xl font-black text-[#1A1225] mb-2 tracking-tight">Service Requests</h3>
                <p class="text-sm font-medium text-neutral-500">Track your service requests & orders</p>
             </div>
-            <!-- Tab Switcher -->
+
             <div class="flex items-center gap-1 bg-[#F8F6FB] rounded-xl p-1">
               <button @click="activeSection = 'requests'" 
                 class="px-4 py-2 rounded-lg text-xs font-black uppercase tracking-widest transition-all"
@@ -99,7 +90,6 @@
             </div>
           </div>
 
-          <!-- Service Requests Section -->
           <div v-if="activeSection === 'requests'" class="space-y-4">
             <div v-if="!allRequests.length" class="flex flex-col items-center justify-center py-20 opacity-30">
                <span class="material-icons-round text-[5rem] mb-4">engineering</span>
@@ -110,7 +100,6 @@
                </button>
             </div>
 
-            <!-- Request Cards -->
             <div v-for="req in allRequests" :key="req.id" 
               class="bg-[#F8F6FB] rounded-2xl p-6 border border-transparent hover:border-primary-500/10 hover:bg-white transition-all duration-300">
               <div class="flex items-start justify-between mb-4">
@@ -136,8 +125,6 @@
                 <span v-if="req.location" class="flex items-center gap-1"><span class="material-icons-round text-sm">location_on</span> {{ req.location }}</span>
                 <span v-if="req.estimatedCost" class="flex items-center gap-1 text-primary-500"><span class="material-icons-round text-sm">payments</span> ETB {{ req.estimatedCost.toLocaleString() }}</span>
               </div>
-
-              <!-- Timeline -->
               <div v-if="req.timeline && req.timeline.length" class="border-t border-[#EEEAF2] pt-4">
                 <div class="flex items-center gap-2 overflow-x-auto pb-1">
                   <div v-for="(step, idx) in req.timeline" :key="idx" class="flex items-center gap-2 shrink-0">
@@ -150,7 +137,6 @@
                 </div>
               </div>
 
-              <!-- Cancel action for pending requests -->
               <div v-if="req.status === 'submitted' || req.status === 'pending'" class="mt-4 flex justify-end">
                 <button @click="customerStore.cancelServiceRequest(req.id)" class="text-xs font-black text-red-400 hover:text-red-500 flex items-center gap-1 transition-colors">
                   <span class="material-icons-round text-sm">cancel</span> Cancel Request
@@ -159,7 +145,6 @@
             </div>
           </div>
 
-          <!-- Orders Section -->
           <div v-if="activeSection === 'orders'" class="space-y-4">
             <div v-if="!customerStore.orders.length" class="flex flex-col items-center justify-center py-20 opacity-30">
                <span class="material-icons-round text-[5rem] mb-4">shopping_bag</span>
@@ -189,8 +174,7 @@
 
               <div class="flex items-center justify-between border-t border-[#EEEAF2] pt-4">
                 <span class="text-sm font-black text-[#1A1225]">Total: ETB {{ order.total?.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</span>
-                
-                <!-- Rating -->
+
                 <div v-if="!order.rated" class="flex items-center gap-2">
                   <span class="text-xs font-black text-slate-400 uppercase tracking-widest">Rate:</span>
                   <div class="flex items-center gap-0.5">
@@ -247,12 +231,11 @@ const editForm = ref({
   location: ''
 })
 
-// Combine localStorage requests with some mock initial data
 const allRequests = computed(() => {
   if (customerStore.serviceRequests.length > 0) {
     return customerStore.serviceRequests
   }
-  // Default mock requests for first-time view
+
   return mockRequests
 })
 
@@ -353,7 +336,6 @@ function rateOrder(orderId, rating) {
   customerStore.rateOrder(orderId, rating)
 }
 
-// Service type styling helpers
 const serviceStyleMap = {
   'Delivery': { icon: 'local_shipping', bg: 'rgba(118,48,163,0.12)', color: '#a854dc' },
   'Payment Processing': { icon: 'payment', bg: 'rgba(100,210,177,0.12)', color: '#64D2B1' },

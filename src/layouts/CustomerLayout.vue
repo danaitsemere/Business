@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col min-h-screen bg-[#F8F6FB]">
-    <!-- Top Modern Navigation -->
+
     <header class="sticky top-0 z-[100] w-full bg-white/80 backdrop-blur-md border-b border-[#EEEAF2] px-6 lg:px-12 py-5">
       <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <!-- Brand Identity Section -->
+      
         <div class="flex items-center gap-6 cursor-pointer group" @click="$router.push('/customer/home')">
           <img src="../assets/logo.png" alt="GTS Logo" class="h-14 w-auto group-hover:scale-105 transition-transform duration-300">
           <div class="h-12 w-[1.5px] bg-[#7630A3] opacity-30"></div>
@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <!-- Nav Links (to the right of brand, left of icons) -->
+
         <nav class="hidden xl:flex items-center gap-1 ml-auto mr-8">
           <button v-for="item in menuItems" :key="item.label"
             class="text-[0.688rem] font-black uppercase tracking-[0.1em] transition-all px-4 py-2 rounded-xl"
@@ -62,7 +62,7 @@
       </div>
     </header>
 
-    <!-- Side Drawers (Cart & Wishlist) -->
+
     <transition enter-active-class="transition duration-300 ease-out" enter-from-class="translate-x-full" enter-to-class="translate-x-0" leave-active-class="transition duration-200 ease-in" leave-from-class="translate-x-0" leave-to-class="translate-x-full">
       <aside v-if="activeDrawer" class="fixed top-0 right-0 z-[200] w-full max-w-md h-full bg-white shadow-2xl flex flex-col border-l border-[#EEEAF2]">
          <div class="p-8 border-b border-[#EEEAF2] flex items-center justify-between">
@@ -76,7 +76,7 @@
          </div>
 
          <div class="flex-1 overflow-y-auto p-8 space-y-4 scrollbar-hide">
-            <!-- CART ITEMS -->
+          
             <template v-if="activeDrawer === 'cart'">
                <div v-if="!cartItems.length" class="flex flex-col items-center justify-center py-16 text-center opacity-50">
                  <span class="material-icons-round text-5xl mb-3">shopping_cart</span>
@@ -101,7 +101,7 @@
                </div>
             </template>
 
-            <!-- WISHLIST ITEMS -->
+           
             <template v-else-if="activeDrawer === 'wishlist'">
                <div v-if="!wishlistItems.length" class="flex flex-col items-center justify-center py-16 text-center opacity-50">
                  <span class="material-icons-round text-5xl mb-3">favorite_border</span>
@@ -124,7 +124,7 @@
             </template>
          </div>
 
-         <!-- Cart Footer with Checkout -->
+
          <div v-if="activeDrawer === 'cart' && cartItems.length" class="p-8 border-t border-[#EEEAF2] space-y-4">
            <div class="flex items-center justify-between">
              <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Total</span>
@@ -139,19 +139,19 @@
     
     <div v-if="activeDrawer" @click="activeDrawer = null" class="fixed inset-0 z-[150] bg-[#1A1225]/40 backdrop-blur-sm"></div>
 
-    <!-- Main Content -->
+   
     <main class="flex-1">
       <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-10 animate-fade-in">
         <router-view />
       </div>
     </main>
 
-    <!-- FOOTER -->
+ 
     <footer class="bg-white border-t border-[#EEEAF2] pt-12 pb-6 px-6 lg:px-12">
        <div class="max-w-7xl mx-auto">
           <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16 mb-10">
              
-             <!-- Brand Column -->
+         
              <div class="md:col-span-4 space-y-5">
                 <div class="flex items-center gap-5 cursor-pointer group" @click="$router.push('/customer/home')">
                    <img src="../assets/logo.png" alt="GTS Logo" class="h-16 w-auto group-hover:scale-105 transition-transform duration-300">
@@ -168,7 +168,7 @@
                 <p class="text-[0.813rem] font-medium text-[#475569]/80 leading-relaxed max-w-xs pl-2">
                    Empowering business through high-end technology curation and architectural excellence.
                 </p>
-                <!-- Social Sync Interface -->
+          
                 <div class="flex items-center gap-3 pt-2 pl-2">
                    <a href="https://info@grandtechsolutions.com/" class="w-10 h-10 bg-[#F8F6FB] rounded-lg border border-[#EEEAF2] flex items-center justify-center text-[#7630A3] hover:scale-105 transition-all">
                       <span class="material-icons-round text-xl">language</span>
@@ -179,7 +179,7 @@
                 </div>
              </div>
 
-             <!-- Contacts Column -->
+         
              <div class="md:col-span-3 space-y-4">
                 <h4 class="text-xs font-black text-[#7630A3] uppercase tracking-widest">Contacts</h4>
                 <div class="space-y-3">
@@ -198,7 +198,8 @@
                 </div>
              </div>
 
-             <!-- Map Column -->
+      
+             
              <div class="md:col-span-5">
                 <h4 class="text-xs font-black text-[#7630A3] uppercase tracking-widest mb-4">Find Us</h4>
                 <div class="w-full h-48 rounded-2xl overflow-hidden border border-[#EEEAF2] shadow-sm">

@@ -49,7 +49,6 @@
       </select>
     </div>
 
-    <!-- Filter tabs -->
     <div class="flex flex-wrap items-center gap-3 mb-6">
       <button v-for="tab in statusTabs" :key="tab.value"
         class="px-5 py-2.5 rounded-full text-[0.813rem] font-bold border-2 transition-all duration-200"
@@ -61,17 +60,16 @@
       </button>
     </div>
 
-    <!-- Requests Cards -->
     <div class="space-y-4">
       <div v-for="req in paginatedRequests" :key="req.id"
         class="bg-white rounded-2xl border border-[#EEEAF2] p-6 shadow-sm hover:shadow-soft hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
         @click="$router.push(`/admin/service-requests/${req.id}`)">
         <div class="flex flex-col md:flex-row md:items-center gap-4">
-          <!-- Left: Info -->
+      
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-3 mb-2">
               <span class="font-heading text-lg font-black text-[#1A1225]">{{ req.customerName }}</span>
-              <!-- Priority indicator -->
+       
               <span class="text-base">{{ req.priority === 'high' ? '🔴' : req.priority === 'medium' ? '🟡' : '🟢' }}</span>
               <span :class="statusBadgeClass(req.status)" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[0.5rem] font-black uppercase tracking-widest">
                 <span class="w-1.5 h-1.5 rounded-full" :class="statusDotClass(req.status)"></span>
@@ -85,7 +83,7 @@
               <span class="flex items-center gap-1"><span class="material-icons-round text-sm">location_on</span> {{ req.location }}</span>
               <span class="flex items-center gap-1"><span class="material-icons-round text-sm">calendar_today</span> {{ formatDate(req.createdAt) }}</span>
               <span class="flex items-center gap-1 text-[#7630A3] font-bold"><span class="material-icons-round text-sm">payments</span> ETB {{ (req.actualCost || req.estimatedCost).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</span>
-              <!-- Payment status -->
+            
               <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[0.5rem] font-black uppercase tracking-widest"
                 :class="{
                   'bg-[#64D2B1]/10 text-[#64D2B1]': req.paymentStatus === 'paid',
@@ -97,25 +95,25 @@
             </div>
           </div>
 
-          <!-- Right: Provider + Actions -->
+     
           <div class="flex flex-col items-end gap-3 shrink-0" @click.stop>
-            <!-- Provider -->
+          
             <div class="flex items-center gap-2">
               <span class="text-xs text-[#7C757E] font-medium">Provider:</span>
               <span v-if="req.providerName" class="text-sm font-bold text-[#1A1225]">{{ req.providerName }}</span>
               <span v-else class="text-sm font-medium text-amber-500">Unassigned</span>
             </div>
 
-            <!-- Admin Actions Only -->
+          
             <div class="flex items-center gap-2">
-              <!-- Assign Provider -->
+             
               <button v-if="!req.providerName && (req.status === 'pending')"
                 class="px-3 py-2 rounded-xl bg-[#7630A3]/10 text-[#7630A3] text-xs font-bold hover:bg-[#7630A3] hover:text-white transition-all flex items-center gap-1"
                 @click.stop="openAssignModal(req)">
                 <span class="material-icons-round text-base">person_add</span> Assign
               </button>
 
-              <!-- Reject (admin action) -->
+              
               <button v-if="req.status === 'pending' || req.status === 'assigned'"
                 class="px-3 py-2 rounded-xl bg-red-50 text-red-500 text-xs font-bold hover:bg-red-500 hover:text-white transition-all flex items-center gap-1"
                 @click.stop="openRejectModal(req)">
@@ -132,7 +130,7 @@
       <p class="text-lg font-medium">No requests found</p>
     </div>
 
-    <!-- Pagination -->
+
     <div v-if="totalPages > 1" class="flex items-center justify-center gap-2 mt-8">
       <button class="w-10 h-10 rounded-xl border border-[#EEEAF2] flex items-center justify-center text-[#7C757E] hover:border-[#7630A3] hover:text-[#7630A3] transition-all disabled:opacity-30"
         :disabled="currentPage === 1" @click="currentPage--">
@@ -150,7 +148,6 @@
       </button>
     </div>
 
-    <!-- Assign Provider Modal -->
     <div v-if="assignModal" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="assignModal = null">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-md animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">
@@ -161,7 +158,6 @@
         </div>
         <p class="text-sm text-[#475569] mb-4">Assign a provider for request <strong>#{{ assignModal?.id }}</strong> ({{ assignModal?.serviceType }})</p>
         
-        <!-- Provider list -->
         <div class="space-y-2 mb-6 max-h-[300px] overflow-y-auto">
           <div v-for="provider in filteredProviders" :key="provider.id"
             class="flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all"
@@ -185,7 +181,6 @@
       </div>
     </div>
 
-    <!-- Reject Modal -->
     <div v-if="rejectModal" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="rejectModal = null">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-md animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">
@@ -243,7 +238,6 @@ const statusTabs = [
 const filteredRequests = computed(() => {
   let list = [...allRequests.value]
   
-  // Status filter
   if (activeTab.value !== 'all') {
     if (activeTab.value === 'in_progress') {
       list = list.filter(r => r.status === 'assigned' || r.status === 'in_progress')
@@ -252,23 +246,20 @@ const filteredRequests = computed(() => {
     }
   }
   
-  // Search
+
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase()
     list = list.filter(r => r.customerName.toLowerCase().includes(q) || r.description.toLowerCase().includes(q) || r.serviceType.toLowerCase().includes(q))
   }
   
-  // Category
   if (categoryFilter.value) {
     list = list.filter(r => r.serviceType === categoryFilter.value)
   }
   
-  // Priority
   if (priorityFilter.value) {
     list = list.filter(r => r.priority === priorityFilter.value)
   }
-  
-  // Sort by priority (high first)
+
   const priorityOrder = { high: 0, medium: 1, low: 2 }
   list.sort((a, b) => (priorityOrder[a.priority] || 2) - (priorityOrder[b.priority] || 2))
   

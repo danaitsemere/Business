@@ -43,7 +43,6 @@
 }
 
 @layer components {
-  /* Buttons */
   .btn-gts {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-black text-[0.813rem] uppercase tracking-widest transition-all duration-300 relative overflow-hidden;
   }
@@ -65,8 +64,6 @@
   .btn-gts-outline {
     @apply btn-gts bg-transparent text-primary-500 border-2 border-primary-500;
   }
-
-  /* Form Architecture */
   .input-gts {
     @apply w-full px-5 py-3.5 bg-white border border-[#EEEAF2] rounded-xl text-secondary-500 text-[0.938rem] transition-all duration-200 font-body;
   }
@@ -75,7 +72,6 @@
     box-shadow: 0 0 0 4px rgba(118, 48, 163, 0.08);
   }
 
-  /* Layout Cards */
   .card-gts {
     @apply bg-white border border-[#EEEAF2] rounded-[2rem] p-8 transition-all duration-300 shadow-sm;
   }
@@ -83,7 +79,6 @@
     @apply shadow-xl border-primary-500/10 -translate-y-1;
   }
 
-  /* Badges & Indicators */
   .badge-gts {
     @apply inline-flex items-center px-3 py-1 rounded-full text-[0.625rem] font-black uppercase tracking-widest;
   }
@@ -97,7 +92,6 @@
     @apply badge-gts bg-neutral-500/10 text-neutral-500;
   }
 
-  /* Stat Card */
   .stat-card-gts {
     @apply rounded-3xl p-8 relative overflow-hidden border border-[#EEEAF2] bg-white shadow-soft;
   }
@@ -106,12 +100,10 @@
     @apply absolute top-0 left-0 w-2 h-full bg-primary-500;
   }
 
-  /* Avatars */
   .avatar-gts {
     @apply rounded-full flex items-center justify-center text-white font-black shrink-0 bg-primary-500;
   }
 
-  /* Select styling */
   .select-gts {
     @apply w-full px-5 py-3.5 bg-white border border-[#EEEAF2] rounded-xl text-secondary-500 text-[0.938rem] transition-all duration-200 font-body cursor-pointer;
   }

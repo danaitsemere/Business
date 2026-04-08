@@ -1,10 +1,9 @@
 <template>
   <div class="w-full max-w-xl mx-auto px-4">
     <div class="bg-white rounded-[2.5rem] p-10 lg:p-14 border border-[#EEEAF2] shadow-2xl text-center relative overflow-hidden">
-      <!-- Decorative Backdrop -->
+
       <div class="absolute -top-20 -right-20 w-80 h-80 bg-[#7630A3]/5 rounded-full blur-[100px]"></div>
       
-      <!-- Brand Lockup -->
       <div class="mb-14 relative z-10 flex flex-col items-center">
         <img src="../../assets/logo.png" alt="GTS Logo" class="h-24 w-auto mb-10 hover:scale-105 transition-transform duration-500 cursor-pointer">
         
@@ -21,7 +20,6 @@
         </div>
       </div>
 
-      <!-- Features -->
       <div class="grid grid-cols-1 gap-2 mb-10">
         <div v-for="(feature, i) in features" :key="i"
           class="flex items-center gap-5 p-5 bg-[#F8F6FB] hover:bg-white border-2 border-transparent hover:border-[#7630A3]/5 rounded-3xl transition-all duration-300 group cursor-default">
@@ -35,7 +33,6 @@
         </div>
       </div>
 
-      <!-- Actions -->
       <div class="flex flex-col sm:flex-row gap-4 mb-14 relative z-10">
         <router-link to="/login" class="flex-1 btn-gts-primary !py-5 rounded-2xl shadow-soft font-black text-sm uppercase tracking-widest text-center">
            Sign In

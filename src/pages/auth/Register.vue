@@ -1,7 +1,7 @@
 <template>
   <div class="w-full max-w-xl mx-auto px-4">
     <div class="bg-white rounded-[2.5rem] p-10 lg:p-14 border border-[#EEEAF2] shadow-2xl relative overflow-hidden">
-      <!-- Back -->
+
       <router-link to="/" class="absolute left-10 top-10 text-[#475569] hover:text-[#7630A3] transition-colors group z-20">
         <span class="material-icons-round text-2xl group-hover:-translate-x-1 transition-transform">arrow_back</span>
       </router-link>
@@ -43,13 +43,11 @@
           </div>
         </div>
 
-        <!-- Error -->
         <div v-if="error" class="flex items-center gap-2.5 px-5 py-3 rounded-2xl text-sm font-bold mb-5 bg-red-50 border border-red-200 text-red-600 animate-fade-in">
           <span class="material-icons-round">error</span>
           {{ error }}
         </div>
 
-        <!-- Success -->
         <div v-if="success" class="flex items-center gap-2.5 px-5 py-3 rounded-2xl text-sm font-bold mb-5 bg-[#64D2B1]/10 border border-[#64D2B1]/30 text-[#64D2B1] animate-fade-in">
           <span class="material-icons-round">check_circle</span>
           Account created! Redirecting...

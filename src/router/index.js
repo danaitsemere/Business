@@ -4,7 +4,7 @@ import CustomerLayout from '../layouts/CustomerLayout.vue'
 import AdminLayout from '../layouts/AdminLayout.vue'
 
 const routes = [
-  // Auth routes
+
   {
     path: '/',
     component: AuthLayout,
@@ -16,7 +16,6 @@ const routes = [
     ]
   },
 
-  // Customer routes
   {
     path: '/customer',
     component: CustomerLayout,
@@ -32,7 +31,6 @@ const routes = [
     ]
   },
 
-  // Admin routes
   {
     path: '/admin',
     component: AdminLayout,
@@ -50,7 +48,6 @@ const routes = [
     ]
   },
 
-  // Catch-all redirect
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]
 
@@ -62,18 +59,15 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const user = JSON.parse(localStorage.getItem('gts_user') || 'null')
 
-  // Redirect logged-in users away from auth pages (Welcome, Login, Register, Forgot Password)
   if (user && (to.path === '/' || to.path === '/login' || to.path === '/register' || to.path === '/forgot-password')) {
     if (user.role === 'admin') return '/admin/dashboard'
     return '/customer/home'
   }
 
-  // Protect authenticated routes — send to Welcome page first
   if (to.meta.requiresAuth && !user) {
     return '/'
   }
 
-  // Role-based access control
   if (to.meta.role && user?.role !== to.meta.role) {
     if (user?.role === 'admin') return '/admin/dashboard'
     return '/customer/home'

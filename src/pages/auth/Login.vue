@@ -1,7 +1,7 @@
 <template>
   <div class="w-full max-w-xl mx-auto px-4">
     <div class="bg-white rounded-[2.5rem] p-10 lg:p-14 border border-[#EEEAF2] shadow-2xl relative overflow-hidden text-center">
-      <!-- Back Button -->
+
       <router-link to="/" class="absolute left-10 top-10 text-[#475569] hover:text-[#7630A3] transition-colors group z-20">
          <span class="material-icons-round text-2xl group-hover:-translate-x-1 transition-transform">arrow_back</span>
       </router-link>
@@ -22,7 +22,6 @@
         </div>
       </div>
 
-      <!-- Error Message -->
       <div v-if="error" class="flex items-center gap-2.5 px-5 py-3 rounded-2xl text-sm font-bold mb-6 bg-red-50 border border-red-200 text-red-600 text-left animate-fade-in">
         <span class="material-icons-round">error</span>
         {{ error }}
@@ -56,7 +55,6 @@
         </button>
       </form>
 
-      <!-- Register Link -->
       <p class="mt-8 text-sm font-medium text-[#475569]">
         Don't have an account? <router-link to="/register" class="text-[#7630A3] font-black hover:underline">Create one</router-link>
       </p>

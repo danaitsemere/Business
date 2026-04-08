@@ -8,8 +8,6 @@
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
-     
-      <!-- Image Section with Interactive Thumbnails -->
       <div class="space-y-6">
         <div class="w-full aspect-[4/3] bg-white border border-[#EEEAF2] rounded-[2rem] p-1 shadow-soft relative overflow-hidden flex items-center justify-center group">
            <div class="absolute inset-0 bg-gradient-to-br from-transparent to-[#F5F3F7] opacity-50"></div>
@@ -18,15 +16,13 @@
            <div class="absolute top-8 left-8 flex gap-2">
               <span v-if="product.onSale" class="bg-red-500 text-white text-[0.688rem] font-black px-3 py-1.5 rounded-lg tracking-tighter uppercase shadow-sm">Special Offer</span>
            </div>
-           <!-- Dynamic badges -->
            <div class="absolute top-8 right-8 flex flex-col gap-2">
              <div class="bg-[#1A1225] text-white px-3 py-1.5 rounded-lg text-[0.625rem] font-black flex items-center gap-1">
                <span class="material-icons-round text-sm">local_fire_department</span> {{ product.views || 120 }} sold
              </div>
            </div>
         </div>
-        
-        <!-- Clickable Thumbnails -->
+ 
         <div class="flex gap-4 overflow-x-auto pb-2 px-1">
            <div v-for="(img, idx) in thumbnailImages" :key="idx" 
              class="w-24 h-24 bg-white border-2 rounded-2xl flex items-center justify-center shrink-0 cursor-pointer transition-all shadow-soft overflow-hidden"
@@ -38,7 +34,6 @@
         </div>
       </div>
 
-      <!-- Product Info -->
       <div class="flex flex-col">
         <div class="mb-8">
            <div class="flex items-center gap-2 mb-4">
@@ -54,7 +49,7 @@
            <h1 class="font-heading text-4xl lg:text-5xl font-black text-[#1A1225] mb-4 leading-tight">{{ product.name }}</h1>
            <p class="text-slate-500 font-medium text-lg leading-relaxed max-w-lg mb-6">{{ product.description }}</p>
 
-           <!-- Trust Signals Row -->
+
            <div class="flex flex-wrap items-center gap-4 text-xs font-bold">
              <span class="flex items-center gap-1.5 px-3 py-2 bg-[#F8F6FB] rounded-xl text-slate-500">
                <span class="material-icons-round text-sm text-tertiary-300">local_shipping</span> Free Delivery
@@ -71,7 +66,6 @@
            </div>
         </div>
 
-        <!-- Price & Cart Decision Box -->
         <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 shadow-soft mb-10 space-y-6">
            <div class="flex items-center justify-between">
               <div>
@@ -88,14 +82,12 @@
               </div>
            </div>
 
-           <!-- Stock urgency -->
            <div class="flex items-center gap-2 px-4 py-2.5 bg-amber-50 border border-amber-200/50 rounded-xl">
              <span class="material-icons-round text-amber-500 text-lg">local_fire_department</span>
              <span class="text-xs font-bold text-amber-700">Only {{ fakeStock }} left in stock — order soon!</span>
            </div>
 
            <div class="flex flex-col sm:flex-row items-center gap-6">
-              <!-- Quantity Selector -->
               <div class="flex items-center bg-[#F8F6FB] rounded-2xl p-2 border border-[#EEEAF2] w-full sm:w-auto">
                  <button @click="quantity > 1 && quantity--" class="w-12 h-12 rounded-xl bg-white text-slate-400 hover:text-[#7630A3] hover:shadow-sm flex items-center justify-center transition-all">
                     <span class="material-icons-round">remove</span>
@@ -106,7 +98,6 @@
                  </button>
               </div>
 
-              <!-- Cart/Wishlist Buttons -->
               <div class="flex gap-3 w-full sm:flex-1">
                  <button @click="toggleWishlist" class="w-14 h-14 rounded-2xl border-2 flex items-center justify-center transition-all"
                    :class="isInWishlist ? 'border-tertiary-300/30 text-tertiary-300 bg-tertiary-300/5' : 'border-[#EEEAF2] text-slate-300 hover:text-tertiary-300 hover:border-tertiary-300/20'">
@@ -128,7 +119,6 @@
       </div>
     </div>
 
-    <!-- Product Features (replaces Technical Framework) -->
     <div class="bg-white rounded-[3rem] p-10 lg:p-16 border border-[#EEEAF2] shadow-soft mb-16">
        <h3 class="font-heading text-3xl font-black text-[#1A1225] mb-12">Product Features</h3>
        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -144,7 +134,6 @@
        </div>
     </div>
 
-    <!-- Customer Reviews Section -->
     <div class="bg-white rounded-[3rem] p-10 lg:p-16 border border-[#EEEAF2] shadow-soft mb-16">
        <div class="flex items-center justify-between mb-12">
          <h3 class="font-heading text-3xl font-black text-[#1A1225]">Customer Reviews</h3>
@@ -181,7 +170,6 @@
        </div>
     </div>
 
-    <!-- Related Products -->
     <div class="mb-16">
       <h3 class="font-heading text-3xl font-black text-[#1A1225] mb-8">You May Also Like</h3>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -234,7 +222,6 @@ const fakeStock = computed(() => Math.floor(Math.random() * 10) + 3)
 
 const isInWishlist = computed(() => customerStore.isInWishlist(productId))
 
-// Dynamic features based on product category
 const productFeatures = computed(() => {
   if (!product.value) return []
   if (product.value.category === 'Electronics') {
@@ -257,7 +244,7 @@ const productFeatures = computed(() => {
   ]
 })
 
-// Fake reviews
+
 const fakeReviews = [
   { id: 1, name: 'Dawit Mekonnen', date: 'Mar 15, 2026', rating: 5, comment: 'Absolutely incredible quality! The build and finish are premium. Sound quality exceeded my expectations — bass is deep, mids are clear, and highs are crisp. Highly recommended!', verified: true },
   { id: 2, name: 'Sara Tadesse', date: 'Mar 10, 2026', rating: 4, comment: 'Great product overall. The design is sleek and comfortable for long use. Battery life is impressive. Only minor issue is the carrying case could be more sturdy.', verified: true },
@@ -266,7 +253,6 @@ const fakeReviews = [
   { id: 5, name: 'Solomon Bekele', date: 'Feb 12, 2026', rating: 4, comment: 'Very satisfied with the purchase. Shipping was fast and the product arrived in perfect condition. Works exactly as described.', verified: true }
 ]
 
-// Related products
 const relatedProducts = computed(() => {
   if (!product.value) return []
   return customerStore.allProducts
@@ -297,7 +283,6 @@ function toggleWishlist() {
 
 function goToProduct(id) {
   router.push(`/customer/product/${id}`)
-  // Force page reload since we're on the same route
   router.go(0)
 }
 </script>

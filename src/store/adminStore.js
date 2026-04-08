@@ -17,7 +17,7 @@ import {
 } from '../mock/admin.js'
 
 export const useAdminStore = defineStore('admin', () => {
-  // Initialize from localStorage or fall back to mock data
+
   const users = ref(JSON.parse(localStorage.getItem('gts_users') || 'null') || [...mockUsers])
   const businesses = ref(JSON.parse(localStorage.getItem('gts_businesses') || 'null') || [...mockBusinesses])
   const products = ref(JSON.parse(localStorage.getItem('gts_products') || 'null') || [...mockProducts])
@@ -32,7 +32,6 @@ export const useAdminStore = defineStore('admin', () => {
   const topBusinesses = ref([...mockTopBusinesses])
   const reports = ref([...mockReports])
 
-  // Toast system
   const toast = ref({ show: false, message: '', type: 'success' })
 
   function showToast(message, type = 'success') {
@@ -40,7 +39,6 @@ export const useAdminStore = defineStore('admin', () => {
     setTimeout(() => { toast.value.show = false }, 3000)
   }
 
-  // Subscription plans
   const subscriptionPlans = ref(JSON.parse(localStorage.getItem('gts_plans') || 'null') || [
     { id: 1, name: 'Basic', role: 'merchant', price: 1499, features: ['Up to 10 products', 'Basic analytics', 'Email support'], billingCycle: 'monthly' },
     { id: 2, name: 'Professional', role: 'merchant', price: 3999, features: ['Up to 50 products', 'Advanced analytics', 'Priority support', 'Featured listings'], billingCycle: 'monthly' },
@@ -62,13 +60,11 @@ export const useAdminStore = defineStore('admin', () => {
     }
   }
 
-  // Persist helpers
   function persistUsers() { localStorage.setItem('gts_users', JSON.stringify(users.value)) }
   function persistBusinesses() { localStorage.setItem('gts_businesses', JSON.stringify(businesses.value)) }
   function persistProducts() { localStorage.setItem('gts_products', JSON.stringify(products.value)) }
   function persistRequests() { localStorage.setItem('gts_requests', JSON.stringify(serviceRequests.value)) }
 
-  // User management
   const allUsers = computed(() => users.value)
   const activeUsers = computed(() => users.value.filter(u => u.status === 'active'))
   const suspendedUsers = computed(() => users.value.filter(u => u.status === 'suspended'))
@@ -106,7 +102,6 @@ export const useAdminStore = defineStore('admin', () => {
     if (user) addLog('user_deleted', 'person_remove', `User ${user.fullName} has been removed`, 'danger')
   }
 
-  // Business management
   const approvedBusinesses = computed(() => businesses.value.filter(b => b.status === 'approved'))
   const pendingBusinesses = computed(() => businesses.value.filter(b => b.status === 'pending'))
   const rejectedBusinesses = computed(() => businesses.value.filter(b => b.status === 'rejected'))
@@ -170,7 +165,6 @@ export const useAdminStore = defineStore('admin', () => {
     }
   }
 
-  // Product management
   function addProduct(product) {
     product.id = Date.now()
     product.status = 'active'
@@ -207,13 +201,11 @@ export const useAdminStore = defineStore('admin', () => {
     }
   }
 
-  // Only products from approved businesses
   const approvedProducts = computed(() => {
     const approvedBizIds = approvedBusinesses.value.map(b => b.id)
     return products.value.filter(p => approvedBizIds.includes(p.merchantId))
   })
 
-  // Service request management
   const allServiceRequests = computed(() => serviceRequests.value)
   const pendingRequests = computed(() => serviceRequests.value.filter(r => r.status === 'pending'))
   const assignedRequests = computed(() => serviceRequests.value.filter(r => r.status === 'assigned'))
@@ -278,7 +270,6 @@ export const useAdminStore = defineStore('admin', () => {
     }
   }
 
-  // Activity log
   function addLog(type, icon, message, severity) {
     systemLogs.value.unshift({
       id: Date.now(),
@@ -289,8 +280,7 @@ export const useAdminStore = defineStore('admin', () => {
       timestamp: new Date().toISOString()
     })
   }
-
-  // Analytics getters
+  
   function getRevenueData() { return revenueData.value }
   function getUserGrowthData() { return userGrowthData.value }
   function getRequestsPerDay() { return requestsPerDayData.value }

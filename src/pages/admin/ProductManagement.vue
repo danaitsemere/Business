@@ -12,13 +12,13 @@
       </div>
     </div>
 
-    <!-- Note -->
+   
     <div class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-[#7630A3]/5 border border-[#7630A3]/10 text-sm text-[#7630A3] font-medium mb-6">
       <span class="material-icons-round text-lg">info</span>
       Only products from approved businesses are shown here
     </div>
 
-    <!-- Filters -->
+   
     <div class="flex flex-wrap items-center gap-4 mb-6">
       <div class="relative flex-1 max-w-md">
         <span class="material-icons-round absolute left-4 top-1/2 -translate-y-1/2 text-[#7C757E]">search</span>
@@ -31,7 +31,7 @@
       </select>
     </div>
 
-    <!-- Products Table -->
+   
     <div class="bg-white rounded-3xl border border-[#EEEAF2] shadow-sm overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full">
@@ -95,7 +95,7 @@
       </div>
     </div>
 
-    <!-- Pagination -->
+   
     <div v-if="totalPages > 1" class="flex items-center justify-center gap-2 mt-6">
       <button class="w-10 h-10 rounded-xl border border-[#EEEAF2] flex items-center justify-center text-[#7C757E] hover:border-[#7630A3] hover:text-[#7630A3] transition-all disabled:opacity-30"
         :disabled="currentPage === 1" @click="currentPage--">
@@ -113,7 +113,7 @@
       </button>
     </div>
 
-    <!-- Add/Edit Product Modal -->
+   
     <div v-if="showAddModal || editProduct" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="closeModal">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-md animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">
@@ -225,7 +225,7 @@ function handleSaveProduct() {
   closeModal()
 }
 
-// Prevent decimal increments on arrow keys - increment by whole numbers
+
 function handlePriceKeydown(e) {
   if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
     e.preventDefault()

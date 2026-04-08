@@ -40,7 +40,6 @@
       </div>
     </div>
 
-    <!-- Navigation Tabs Bar -->
     <div class="max-w-6xl mx-auto px-6 mt-12 mb-10 border-b border-[#EEEAF2]">
        <div class="flex items-center gap-10">
           <button v-for="tab in tabs" :key="tab"
@@ -53,9 +52,8 @@
        </div>
     </div>
 
-    <!-- Tab Content -->
     <div class="max-w-6xl mx-auto px-6">
-       <!-- Products Grid -->
+
        <div v-if="activeTab === 'Products'" class="space-y-8">
           <div class="flex items-center justify-between">
              <h2 class="font-heading text-2xl font-black text-[#1A1225]">Featured Solutions</h2>
@@ -99,7 +97,6 @@
           </div>
        </div>
 
-       <!-- About Tab -->
        <div v-if="activeTab === 'About'" class="animate-fade-in">
          <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 py-6">
            <div class="lg:col-span-2 space-y-8">
@@ -113,7 +110,6 @@
                </p>
              </div>
 
-             <!-- Stats -->
              <div class="grid grid-cols-3 gap-6">
                <div class="bg-[#F8F6FB] rounded-2xl p-6 text-center">
                  <span class="text-3xl font-black text-[#1A1225] block mb-1">{{ business.totalViews?.toLocaleString() || '4.8k' }}</span>
@@ -129,7 +125,6 @@
                </div>
              </div>
 
-             <!-- Values -->
              <div class="space-y-4">
                <h3 class="font-heading text-xl font-black text-[#1A1225]">Our Values</h3>
                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -144,7 +139,6 @@
              </div>
            </div>
 
-           <!-- Contact sidebar -->
            <div class="space-y-6">
              <div class="bg-white border border-[#EEEAF2] rounded-2xl p-8 space-y-6 shadow-soft">
                <div class="flex items-center gap-4 border-b border-[#EEEAF2] pb-6">
@@ -169,7 +163,6 @@
                </div>
              </div>
 
-             <!-- Business hours -->
              <div class="bg-white border border-[#EEEAF2] rounded-2xl p-8 space-y-4 shadow-soft">
                <h4 class="font-black text-sm text-[#1A1225] flex items-center gap-2">
                  <span class="material-icons-round text-[#7630A3]">schedule</span> Business Hours
@@ -184,7 +177,6 @@
          </div>
        </div>
 
-       <!-- Reviews Tab -->
        <div v-if="activeTab === 'Reviews'" class="animate-fade-in py-6">
          <div class="flex items-center justify-between mb-8">
            <h2 class="font-heading text-2xl font-black text-[#1A1225]">Customer Reviews</h2>

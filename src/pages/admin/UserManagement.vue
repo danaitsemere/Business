@@ -10,7 +10,6 @@
       </div>
     </div>
 
-    <!-- Filter Tabs -->
     <div class="flex flex-wrap items-center gap-3 mb-6">
       <button v-for="tab in statusTabs" :key="tab.value"
         class="px-5 py-2.5 rounded-full text-[0.813rem] font-bold border-2 transition-all duration-200"
@@ -23,7 +22,6 @@
       </button>
     </div>
 
-    <!-- Search -->
     <div class="mb-6">
       <div class="relative max-w-md">
         <span class="material-icons-round absolute left-4 top-1/2 -translate-y-1/2 text-[#7C757E]">search</span>
@@ -31,7 +29,6 @@
       </div>
     </div>
 
-    <!-- Users Table -->
     <div class="bg-white rounded-3xl border border-[#EEEAF2] shadow-sm overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full">

@@ -11,7 +11,7 @@
       </button>
     </div>
 
-    <!-- Report Types (clickable → opens report builder) -->
+   
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       <div v-for="type in reportTypes" :key="type.label"
         class="bg-white rounded-3xl p-6 border border-[#EEEAF2] shadow-sm cursor-pointer hover:-translate-y-1 hover:shadow-soft transition-all group"
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <!-- Search & Filters -->
+   
     <div class="flex flex-wrap items-center gap-4 mb-6">
       <div class="relative flex-1 max-w-md">
         <span class="material-icons-round absolute left-4 top-1/2 -translate-y-1/2 text-[#7C757E]">search</span>
@@ -45,7 +45,7 @@
       </select>
     </div>
 
-    <!-- Reports List -->
+   
     <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
       <div class="flex items-center justify-between mb-5">
         <h3 class="font-heading text-lg font-black text-[#1A1225]">Generated Reports</h3>
@@ -74,7 +74,7 @@
               <span class="text-xs text-[#7C757E]">{{ report.generatedAt }}</span>
               <span class="text-xs text-[#7C757E]">{{ report.format || 'PDF' }} • {{ report.size || '2.4 MB' }}</span>
             </div>
-            <!-- Mini preview for ready reports -->
+          
             <div v-if="report.status === 'ready' && report.preview" class="mt-2 p-2 bg-white rounded-lg border border-[#EEEAF2] text-xs text-[#475569]">
               {{ report.preview }}
             </div>
@@ -88,26 +88,26 @@
               }">
               {{ report.status }}
             </span>
-            <!-- Preview button -->
+           
             <button v-if="report.status === 'ready'"
               class="w-9 h-9 rounded-xl bg-white text-[#475569] hover:text-[#7630A3] hover:bg-[#7630A3]/10 transition-colors flex items-center justify-center border border-[#EEEAF2]"
               title="Preview" @click="openPreview(report)">
               <span class="material-icons-round text-lg">visibility</span>
             </button>
-            <!-- Download dropdown -->
+        
             <div v-if="report.status === 'ready'" class="relative">
               <button class="w-9 h-9 rounded-xl bg-white text-[#475569] hover:text-[#7630A3] hover:bg-[#7630A3]/10 transition-colors flex items-center justify-center border border-[#EEEAF2]"
                 title="Download" @click="downloadReport(report)">
                 <span class="material-icons-round text-lg">download</span>
               </button>
             </div>
-            <!-- Retry for failed -->
+          
             <button v-if="report.status === 'failed'"
               class="w-9 h-9 rounded-xl bg-white text-amber-500 hover:bg-amber-50 transition-colors flex items-center justify-center border border-[#EEEAF2]"
               title="Retry" @click="retryReport(report)">
               <span class="material-icons-round text-lg">refresh</span>
             </button>
-            <!-- Delete/Archive -->
+            
             <button class="w-9 h-9 rounded-xl bg-white text-[#7C757E] hover:text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center border border-[#EEEAF2] opacity-0 group-hover:opacity-100"
               title="Delete" @click="deleteReport(report.id)">
               <span class="material-icons-round text-lg">delete</span>
@@ -122,7 +122,6 @@
       </div>
     </div>
 
-    <!-- Saved Templates -->
     <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm mt-6">
       <h3 class="font-heading text-lg font-black text-[#1A1225] mb-4">Saved Templates</h3>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -138,7 +137,6 @@
       </div>
     </div>
 
-    <!-- Report Builder Modal -->
     <div v-if="showBuilder" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="showBuilder = false">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-md animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">
@@ -192,7 +190,6 @@
             </div>
           </div>
 
-          <!-- Schedule -->
           <div class="space-y-2 pt-2 border-t border-[#EEEAF2]">
             <label class="flex items-center gap-3 cursor-pointer">
               <input type="checkbox" v-model="newReport.scheduled" class="w-4 h-4 accent-[#7630A3] rounded">
@@ -213,7 +210,6 @@
       </div>
     </div>
 
-    <!-- Preview Modal -->
     <div v-if="previewReport" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="previewReport = null">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-lg animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">

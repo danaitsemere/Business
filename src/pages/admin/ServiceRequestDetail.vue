@@ -1,14 +1,14 @@
 <template>
   <div class="animate-fade-in">
-    <!-- Back -->
+   
     <button @click="$router.push('/admin/service-requests')" class="flex items-center gap-2 text-[#7630A3] font-black text-sm hover:gap-3 transition-all mb-6">
       <span class="material-icons-round text-base">arrow_back</span> Back to Requests
     </button>
 
     <div v-if="request" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Main Info -->
+     
       <div class="lg:col-span-2 space-y-6">
-        <!-- Header -->
+        
         <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-4">
@@ -49,7 +49,6 @@
           </div>
         </div>
 
-        <!-- Timeline -->
         <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
           <h3 class="font-heading text-lg font-black text-[#1A1225] mb-6">Status Timeline</h3>
           <div class="relative">
@@ -71,9 +70,8 @@
         </div>
       </div>
 
-      <!-- Sidebar -->
       <div class="space-y-6">
-        <!-- Provider -->
+  
         <div class="bg-white rounded-3xl p-6 border border-[#EEEAF2] shadow-sm">
           <h3 class="font-heading text-base font-black text-[#1A1225] mb-4">Assigned Provider</h3>
           <div v-if="request.providerName" class="flex items-center gap-3 p-4 bg-[#F8F6FB] rounded-2xl border border-[#EEEAF2]">
@@ -94,7 +92,6 @@
           </div>
         </div>
 
-        <!-- Actions -->
         <div class="bg-white rounded-3xl p-6 border border-[#EEEAF2] shadow-sm">
           <h3 class="font-heading text-base font-black text-[#1A1225] mb-4">Admin Actions</h3>
           <div class="flex flex-col gap-3">
@@ -120,7 +117,6 @@
           </div>
         </div>
 
-        <!-- Dates -->
         <div class="bg-white rounded-3xl p-6 border border-[#EEEAF2] shadow-sm">
           <h3 class="font-heading text-base font-black text-[#1A1225] mb-4">Key Dates</h3>
           <div class="space-y-3">
@@ -147,7 +143,6 @@
       <router-link to="/admin/service-requests" class="text-[#7630A3] font-black text-sm mt-2 inline-block hover:underline">← Back to requests</router-link>
     </div>
 
-    <!-- Assign Modal -->
     <div v-if="showAssign" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="showAssign = false">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-md animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">
@@ -170,7 +165,6 @@
       </div>
     </div>
 
-    <!-- Reject Modal -->
     <div v-if="showReject" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="showReject = false">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-md animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">

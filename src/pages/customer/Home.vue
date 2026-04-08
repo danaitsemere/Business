@@ -1,6 +1,5 @@
 <template>
   <div class="animate-fade-in space-y-12 pb-20">
-    <!-- Hero & Main Search Section -->
     <section class="text-center pt-8 pb-4 relative">
       <h1 class="font-heading text-4xl lg:text-6xl font-extrabold text-[#1A1225] mb-6 tracking-tight">
         Master Your <span class="text-primary-500">Business</span> Growth
@@ -28,7 +27,6 @@
       </div>
     </section>
 
-    <!-- Main Navigation Interface Tabs -->
     <section class="max-w-7xl mx-auto px-4">
       <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
         <button v-for="tab in mainTabs" :key="tab.id"
@@ -41,7 +39,6 @@
       </div>
     </section>
 
-    <!-- ==================== EXPLORE PRODUCTS TAB ==================== -->
     <div v-if="activeMainTab === 'explore'" class="space-y-12">
       <section class="max-w-7xl mx-auto px-4">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-[#EEEAF2] pb-6 mb-8">
@@ -64,7 +61,6 @@
           </div>
         </div>
 
-        <!-- Product Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           <div v-for="product in filteredProducts" :key="product.id" 
             class="group bg-white rounded-2xl p-3 border border-[#EEEAF2] hover:border-primary-500/20 hover:shadow-lg transition-all duration-300 flex flex-col relative overflow-hidden cursor-pointer"
@@ -112,7 +108,6 @@
         </div>
       </section>
 
-      <!-- Premium Shops Preview (shown below products in explore tab) -->
       <section class="max-w-7xl mx-auto px-4 mt-16">
         <div class="flex items-center justify-between mb-8">
           <div>
@@ -152,7 +147,6 @@
         </div>
       </section>
 
-      <!-- Service Portal Preview (shown below shops in explore tab) -->
       <section class="max-w-7xl mx-auto px-4 mt-16">
         <div class="flex items-center justify-between mb-8">
           <div>
@@ -178,7 +172,6 @@
       </section>
     </div>
 
-    <!-- ==================== PREMIUM SHOPS TAB (only shops content) ==================== -->
     <section v-if="activeMainTab === 'shops'" class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between mb-8">
         <div>
@@ -229,9 +222,8 @@
       </div>
     </section>
 
-    <!-- ==================== SERVICES TAB (Service Types → Providers Flow) ==================== -->
     <section v-if="activeMainTab === 'services'" class="max-w-5xl mx-auto px-4">
-      <!-- Step 1: Service Types Grid -->
+
       <div v-if="!selectedServiceType" class="space-y-8">
         <div class="text-center mb-10">
           <div class="w-16 h-16 bg-primary-500/5 text-primary-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -256,8 +248,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Step 2: Service Providers for selected type -->
       <div v-else class="space-y-8">
         <button @click="selectedServiceType = null" class="flex items-center gap-2 text-primary-500 font-black text-sm hover:gap-3 transition-all mb-4">
           <span class="material-icons-round text-base">arrow_back</span> Back to Service Types
@@ -273,7 +263,6 @@
           </div>
         </div>
 
-        <!-- Provider Cards -->
         <div class="space-y-4">
           <div v-for="provider in filteredProviders" :key="provider.name"
             class="bg-white rounded-2xl p-6 border border-[#EEEAF2] hover:border-primary-500/20 hover:shadow-soft transition-all flex flex-col md:flex-row items-start md:items-center gap-6">
@@ -298,7 +287,6 @@
           </div>
         </div>
 
-        <!-- Service Request Form Modal -->
         <div v-if="showRequestForm" class="fixed inset-0 z-[300] flex items-center justify-center p-4">
           <div class="absolute inset-0 bg-[#1A1225]/50 backdrop-blur-sm" @click="showRequestForm = false"></div>
           <div class="relative bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto">
@@ -359,8 +347,6 @@ const activeProductTab = ref('featured')
 const searchQuery = ref('')
 const searchFilter = ref('all')
 const sortBy = ref('newest')
-
-// Service Portal State
 const selectedServiceType = ref(null)
 const showRequestForm = ref(false)
 const requestProvider = ref(null)
@@ -399,7 +385,6 @@ const serviceTypes = [
   { name: 'Consulting', icon: 'groups', desc: 'Business strategy consulting', bg: 'rgba(239,68,68,0.12)', color: '#f87171' }
 ]
 
-// Mock providers per service type
 const serviceProviders = {
   'Delivery': [
     { name: 'Anbessa Logistics', desc: 'Express same-day delivery across all major Ethiopian cities', rating: '4.9', responseTime: '< 1 hour', price: 2500 },

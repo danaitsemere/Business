@@ -8,7 +8,6 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- General Settings -->
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-10 h-10 rounded-2xl bg-[#7630A3]/10 flex items-center justify-center">
@@ -47,7 +46,7 @@
         </div>
       </div>
 
-      <!-- Notifications & Toggles -->
+      
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-10 h-10 rounded-2xl bg-[#64D2B1]/10 flex items-center justify-center">
@@ -73,7 +72,6 @@
         </div>
       </div>
 
-      <!-- Theme -->
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-10 h-10 rounded-2xl bg-[#7630A3]/10 flex items-center justify-center">
@@ -97,7 +95,6 @@
         </div>
       </div>
 
-      <!-- Danger Zone -->
       <div class="bg-white rounded-3xl p-8 border border-red-200 shadow-sm">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-10 h-10 rounded-2xl bg-red-50 flex items-center justify-center">
@@ -130,7 +127,6 @@
       </div>
     </div>
 
-    <!-- Save Button -->
     <div class="flex items-center justify-between mt-8 p-6 bg-white rounded-3xl border border-[#EEEAF2] shadow-sm">
       <div class="flex items-center gap-2">
         <span v-if="saved" class="flex items-center gap-1.5 text-sm text-[#64D2B1] font-bold animate-fade-in">
@@ -144,7 +140,6 @@
       </button>
     </div>
 
-    <!-- Reset Confirmation Modal -->
     <div v-if="showResetConfirm" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="showResetConfirm = false">
       <div class="bg-white border border-red-200 rounded-3xl p-8 w-full max-w-sm animate-scale-in text-center shadow-2xl">
         <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">

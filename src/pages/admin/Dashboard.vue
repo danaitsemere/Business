@@ -5,7 +5,7 @@
       <p class="text-[#475569] font-medium">Here's what's happening on your platform today</p>
     </div>
 
-    <!-- Key Stats -->
+  
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div v-for="(stat, i) in stats" :key="i" class="stat-card-gts group cursor-pointer">
         <div class="flex items-center justify-between mb-4">
@@ -26,9 +26,9 @@
     </div>
 
 
-    <!-- Charts Row -->
+ 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-      <!-- Revenue Chart -->
+   
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center justify-between mb-6">
           <h3 class="font-heading text-lg font-black text-[#1A1225]">Revenue Overview</h3>
@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <!-- User Growth -->
+   
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center justify-between mb-6">
           <h3 class="font-heading text-lg font-black text-[#1A1225]">Customer Growth</h3>
@@ -67,9 +67,9 @@
       </div>
     </div>
 
-    <!-- Pending Items + Recent Activity -->
+   
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-      <!-- Pending Businesses -->
+    
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center justify-between mb-5">
           <h3 class="font-heading text-lg font-black text-[#1A1225]">Pending Approvals</h3>
@@ -105,7 +105,7 @@
         </div>
       </div>
 
-      <!-- Recent Activity -->
+
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center justify-between mb-5">
           <h3 class="font-heading text-lg font-black text-[#1A1225]">Recent Activity</h3>

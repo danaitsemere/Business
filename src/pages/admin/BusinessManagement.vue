@@ -10,7 +10,7 @@
       </button>
     </div>
 
-    <!-- Stats Row -->
+   
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
       <div class="stat-card-gts">
         <div class="text-sm text-[#7C757E] font-medium mb-1">Total</div>
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <!-- Filter Tabs -->
+  
     <div class="flex flex-wrap items-center gap-3 mb-6">
       <button v-for="tab in filterTabs" :key="tab.value"
         class="px-5 py-2.5 rounded-full text-[0.813rem] font-bold border-2 transition-all duration-200"
@@ -42,7 +42,7 @@
       </button>
     </div>
 
-    <!-- Search -->
+    
     <div class="flex items-center gap-4 mb-6">
       <div class="relative flex-1 max-w-md">
         <span class="material-icons-round absolute left-4 top-1/2 -translate-y-1/2 text-[#7C757E]">search</span>
@@ -54,11 +54,11 @@
       </select>
     </div>
 
-    <!-- Business Cards -->
+   
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
       <div v-for="biz in paginatedBusinesses" :key="biz.id" class="bg-white rounded-3xl border border-[#EEEAF2] shadow-sm relative overflow-hidden hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
         
-        <!-- Subscription Plan Banner (always shown on top) -->
+       
         <div class="px-5 py-2.5 border-b flex items-center justify-between"
           :class="biz.featured
             ? 'bg-gradient-to-r from-amber-50 to-amber-100/50 border-amber-200/30'
@@ -71,7 +71,7 @@
         </div>
 
         <div class="p-6">
-          <!-- Status badge -->
+         
           <div class="flex items-center justify-end gap-2 mb-3">
             <span :class="{
               'bg-[#64D2B1]/10 text-[#64D2B1]': biz.status === 'approved',
@@ -121,7 +121,7 @@
               </span>
             </div>
             <div class="flex items-center gap-2">
-              <!-- Pending: Approve / Reject -->
+             
               <button v-if="biz.status === 'pending'"
                 class="w-8 h-8 rounded-lg bg-[#64D2B1]/10 text-[#64D2B1] flex items-center justify-center hover:bg-[#64D2B1] hover:text-white transition-all"
                 @click="adminStore.approveBusiness(biz.id)" title="Approve">
@@ -132,7 +132,7 @@
                 @click="adminStore.rejectBusiness(biz.id)" title="Reject">
                 <span class="material-icons-round text-lg">close</span>
               </button>
-              <!-- Approved: Toggle Featured / Suspend -->
+              
               <button v-if="biz.status === 'approved'"
                 class="w-8 h-8 rounded-lg transition-all flex items-center justify-center"
                 :class="biz.featured ? 'bg-amber-50 text-amber-500 hover:bg-amber-100' : 'bg-[#F8F6FB] text-[#7C757E] hover:text-amber-500'"
@@ -144,7 +144,7 @@
                 @click="confirmSuspend(biz)" title="Suspend">
                 <span class="material-icons-round text-lg">block</span>
               </button>
-              <!-- Suspended: Reactivate only -->
+             
               <button v-if="biz.status === 'suspended'"
                 class="w-8 h-8 rounded-lg bg-[#64D2B1]/10 text-[#64D2B1] flex items-center justify-center hover:bg-[#64D2B1] hover:text-white transition-all"
                 @click="adminStore.unsuspendBusiness(biz.id)" title="Reactivate">
@@ -161,7 +161,7 @@
       <p class="text-lg font-medium">No businesses found</p>
     </div>
 
-    <!-- Pagination -->
+    
     <div v-if="totalPages > 1" class="flex items-center justify-center gap-2 mt-8">
       <button class="w-10 h-10 rounded-xl border border-[#EEEAF2] flex items-center justify-center text-[#7C757E] hover:border-[#7630A3] hover:text-[#7630A3] transition-all disabled:opacity-30"
         :disabled="currentPage === 1" @click="currentPage--">
@@ -179,7 +179,7 @@
       </button>
     </div>
 
-    <!-- Suspend Confirmation Modal -->
+    
     <div v-if="suspendTarget" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="suspendTarget = null">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-sm animate-scale-in shadow-2xl text-center">
         <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -194,7 +194,7 @@
       </div>
     </div>
 
-    <!-- Subscription Plans Modal -->
+    
     <div v-if="showPlansModal" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="showPlansModal = false">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-3xl animate-scale-in shadow-2xl max-h-[85vh] overflow-y-auto">
         <div class="flex items-center justify-between mb-6">
@@ -204,7 +204,7 @@
           </button>
         </div>
 
-        <!-- Merchant Plans -->
+   
         <h4 class="text-[0.688rem] font-black uppercase tracking-widest text-[#7C757E] mb-4">Merchant Plans</h4>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div v-for="plan in merchantPlans" :key="plan.id" class="border border-[#EEEAF2] rounded-2xl p-5 hover:border-[#7630A3]/30 transition-all">
@@ -232,7 +232,7 @@
           </div>
         </div>
 
-        <!-- Provider Plans -->
+      
         <h4 class="text-[0.688rem] font-black uppercase tracking-widest text-[#7C757E] mb-4">Service Provider Plans</h4>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div v-for="plan in providerPlans" :key="plan.id" class="border border-[#EEEAF2] rounded-2xl p-5 hover:border-[#7630A3]/30 transition-all">
@@ -260,7 +260,7 @@
           </div>
         </div>
 
-        <!-- Save Plans Button -->
+        
         <div class="flex items-center justify-between mt-8 pt-6 border-t border-[#EEEAF2]">
           <div class="flex items-center gap-2">
             <span v-if="plansSaved" class="flex items-center gap-1.5 text-sm text-[#64D2B1] font-bold animate-fade-in">

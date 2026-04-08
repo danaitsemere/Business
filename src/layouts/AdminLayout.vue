@@ -1,10 +1,10 @@
 <template>
   <div class="flex min-h-screen bg-[#F8F6FB]">
-    <!-- Sidebar -->
+ 
     <aside class="fixed top-0 left-0 h-screen bg-white border-r border-[#EEEAF2] flex flex-col z-[100] transition-all duration-300 shadow-sm"
       :class="sidebarCollapsed ? 'w-[88px]' : 'w-[280px]'">
 
-      <!-- Brand Identity -->
+   
       <div class="px-6 py-8 flex items-center gap-4 border-b border-[#EEEAF2] h-24 overflow-hidden">
         <img src="../assets/logo.png" alt="Logo" class="h-10 w-auto shrink-0 cursor-pointer hover:scale-110 transition-transform" @click="$router.push('/admin/dashboard')">
         
@@ -17,7 +17,7 @@
         </template>
       </div>
 
-      <!-- Nav -->
+  
       <nav class="flex-1 px-4 py-6 flex flex-col gap-1.5 overflow-y-auto custom-scrollbar">
         <router-link v-for="item in navItems" :key="item.path" :to="item.path"
           class="flex items-center gap-4 px-4 py-3 rounded-2xl text-[#475569] text-[0.813rem] font-bold transition-all duration-200 hover:bg-[#F8F6FB] hover:text-[#7630A3] group"
@@ -28,7 +28,7 @@
         </router-link>
       </nav>
 
-      <!-- User/Footer -->
+  
       <div class="p-4 border-t border-[#EEEAF2]">
         <div v-if="!sidebarCollapsed" class="flex items-center gap-3 p-3 mb-3 bg-[#F8F6FB] rounded-2xl border border-[#EEEAF2]">
            <div class="w-10 h-10 rounded-xl bg-[#7630A3] flex items-center justify-center text-white font-black text-xs shadow-soft">SA</div>
@@ -44,7 +44,7 @@
       </div>
     </aside>
 
-    <!-- Main -->
+
     <main class="flex-1 transition-all duration-300" :class="sidebarCollapsed ? 'ml-[88px]' : 'ml-[280px]'">
       <header class="flex items-center justify-between px-10 py-6 border-b border-[#EEEAF2] bg-white/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="flex items-center gap-6">
@@ -69,7 +69,7 @@
       </div>
     </main>
 
-    <!-- Global Toast -->
+  
     <Transition name="toast">
       <div v-if="adminStore.toast.show" class="fixed bottom-6 right-6 z-[300] flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl border text-sm font-bold animate-fade-in"
         :class="{

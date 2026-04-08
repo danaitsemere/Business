@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#F8F6FB]">
-    <!-- Background orbs using customer palette -->
+    
     <div class="fixed inset-0 z-0">
       <div class="absolute w-[500px] h-[500px] bg-[#7630A3] rounded-full -top-32 -right-32 blur-[120px] opacity-10 animate-float"></div>
       <div class="absolute w-[400px] h-[400px] bg-[#64D2B1] rounded-full -bottom-24 -left-24 blur-[120px] opacity-10 animate-float" style="animation-delay:3s;"></div>

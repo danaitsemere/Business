@@ -1,11 +1,9 @@
 <template>
   <div class="animate-fade-in max-w-5xl mx-auto py-8">
-    <!-- Back button -->
     <button @click="$router.push('/customer/home')" class="flex items-center gap-2 text-primary-500 font-black text-sm hover:gap-3 transition-all mb-8">
       <span class="material-icons-round text-base">arrow_back</span> Continue Shopping
     </button>
 
-    <!-- Step Indicator -->
     <div class="flex items-center justify-center gap-4 mb-12">
       <div v-for="(step, idx) in steps" :key="step.id" class="flex items-center gap-4">
         <div class="flex items-center gap-2">
@@ -21,7 +19,6 @@
       </div>
     </div>
 
-    <!-- Step 1: Order Summary -->
     <div v-if="currentStep === 0" class="space-y-8">
       <div class="bg-white rounded-3xl p-8 lg:p-10 border border-[#EEEAF2] shadow-soft">
         <h2 class="font-heading text-2xl font-black text-[#1A1225] mb-8">Order Summary</h2>
@@ -47,8 +44,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Totals -->
         <div class="border-t border-[#EEEAF2] pt-6 space-y-3">
           <div class="flex justify-between text-sm">
             <span class="text-slate-400 font-bold">Subtotal</span>
@@ -71,12 +66,10 @@
       </button>
     </div>
 
-    <!-- Step 2: Payment -->
     <div v-if="currentStep === 1" class="space-y-8">
       <div class="bg-white rounded-3xl p-8 lg:p-10 border border-[#EEEAF2] shadow-soft">
         <h2 class="font-heading text-2xl font-black text-[#1A1225] mb-8">Payment Details</h2>
-        
-        <!-- Payment Method Selection -->
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div v-for="method in paymentMethods" :key="method.id"
             class="p-5 rounded-2xl border-2 cursor-pointer transition-all flex items-center gap-3"
@@ -90,7 +83,6 @@
           </div>
         </div>
 
-        <!-- Card Form (shown for credit card) -->
         <div v-if="selectedPayment === 'card'" class="space-y-5">
           <div class="space-y-2">
             <label class="text-[0.625rem] font-black uppercase text-slate-400 tracking-widest pl-1">Card Number</label>
@@ -112,7 +104,6 @@
           </div>
         </div>
 
-        <!-- Mobile payment / Bank transfer info -->
         <div v-if="selectedPayment === 'mobile'" class="p-6 bg-[#F8F6FB] rounded-2xl text-center">
           <span class="material-icons-round text-4xl text-primary-500 mb-3">phone_android</span>
           <p class="font-black text-sm text-[#1A1225] mb-1">Pay via Mobile Money</p>
@@ -147,7 +138,6 @@
       </div>
     </div>
 
-    <!-- Step 3: Confirmation & Rating -->
     <div v-if="currentStep === 2" class="space-y-8">
       <div class="bg-white rounded-3xl p-10 lg:p-14 border border-[#EEEAF2] shadow-soft text-center">
         <div class="w-20 h-20 bg-tertiary-300/10 text-tertiary-300 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -157,7 +147,6 @@
         <p class="text-slate-500 font-medium text-lg mb-2">Thank you for your purchase.</p>
         <p class="text-slate-400 text-sm font-bold mb-10">Order #{{ placedOrder?.id }} • ETB {{ cartTotalSnapshot.toLocaleString(undefined, { minimumFractionDigits: 2 }) }}</p>
 
-        <!-- Rating Section -->
         <div class="max-w-md mx-auto bg-[#F8F6FB] rounded-2xl p-8">
           <h3 class="font-heading text-lg font-black text-[#1A1225] mb-2">Rate Your Experience</h3>
           <p class="text-xs text-slate-400 font-medium mb-6">How was your shopping experience?</p>

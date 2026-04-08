@@ -5,13 +5,12 @@
         <h1 class="font-heading text-3xl font-black text-[#1A1225] mb-2">Verification Center</h1>
         <p class="text-[#475569] font-medium">Review and approve business applications</p>
       </div>
-      <!-- Bulk Approve -->
       <button v-if="selectedIds.length > 0" class="btn-gts-primary" @click="bulkApprove">
         <span class="material-icons-round">done_all</span> Approve Selected ({{ selectedIds.length }})
       </button>
     </div>
 
-    <!-- Tabs (reordered: All first) -->
+ 
     <div class="flex flex-wrap items-center gap-3 mb-6">
       <button v-for="tab in tabs" :key="tab.value"
         class="px-5 py-2.5 rounded-full text-[0.813rem] font-bold border-2 transition-all duration-200"
@@ -23,12 +22,11 @@
       </button>
     </div>
 
-    <!-- Business Verification Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div v-for="biz in paginatedBusinesses" :key="biz.id"
         class="bg-white rounded-3xl border border-[#EEEAF2] p-6 shadow-sm hover:shadow-soft transition-all">
         <div class="flex items-start gap-4">
-          <!-- Bulk select checkbox -->
+    
           <div v-if="biz.status === 'pending'" class="pt-1">
             <input type="checkbox" :checked="selectedIds.includes(biz.id)" @change="toggleSelect(biz.id)"
               class="w-5 h-5 rounded-lg accent-[#7630A3] cursor-pointer">
@@ -68,7 +66,6 @@
               </div>
             </div>
 
-            <!-- Documents (clickable) -->
             <div v-if="biz.documents && biz.documents.length" class="mb-4">
               <p class="text-[0.625rem] font-black uppercase tracking-widest text-[#7C757E] mb-2">Submitted Documents</p>
               <div class="flex flex-wrap gap-2">
@@ -82,7 +79,6 @@
               </div>
             </div>
 
-            <!-- Status history -->
             <div v-if="biz.status !== 'pending'" class="mb-4 p-3 bg-[#F8F6FB] rounded-xl border border-[#EEEAF2]">
               <p class="text-[0.625rem] font-black uppercase tracking-widest text-[#7C757E] mb-2">History</p>
               <div class="space-y-1 text-xs text-[#475569]">
@@ -93,7 +89,6 @@
               </div>
             </div>
 
-            <!-- Verification Checklist (for pending) -->
             <div v-if="biz.status === 'pending'" class="mb-4 p-4 bg-[#F8F6FB] rounded-xl border border-[#EEEAF2]">
               <p class="text-[0.625rem] font-black uppercase tracking-widest text-[#7C757E] mb-3">Verification Checklist</p>
               <div class="space-y-2">
@@ -105,7 +100,6 @@
               </div>
             </div>
 
-            <!-- Actions -->
             <div v-if="biz.status === 'pending'" class="flex items-center gap-3">
               <button class="flex-1 py-3 rounded-xl bg-[#64D2B1] text-white font-bold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2"
                 @click="confirmApprove(biz)">
@@ -136,7 +130,6 @@
       <p class="text-lg font-medium">{{ activeTab === 'pending' ? 'No pending verifications' : 'No businesses found' }}</p>
     </div>
 
-    <!-- Pagination -->
     <div v-if="totalPages > 1" class="flex items-center justify-center gap-2 mt-8">
       <button class="w-10 h-10 rounded-xl border border-[#EEEAF2] flex items-center justify-center text-[#7C757E] hover:border-[#7630A3] hover:text-[#7630A3] transition-all disabled:opacity-30"
         :disabled="currentPage === 1" @click="currentPage--">
@@ -154,7 +147,6 @@
       </button>
     </div>
 
-    <!-- Approve Confirmation Modal -->
     <div v-if="approveTarget" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="approveTarget = null">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-sm animate-scale-in shadow-2xl text-center">
         <div class="w-16 h-16 bg-[#64D2B1]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -169,7 +161,6 @@
       </div>
     </div>
 
-    <!-- Reject Modal with reason -->
     <div v-if="rejectTarget" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="rejectTarget = null">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-md animate-scale-in shadow-2xl">
         <div class="flex items-center justify-between mb-6">
@@ -186,8 +177,6 @@
         </button>
       </div>
     </div>
-
-    <!-- Document Preview Modal -->
     <div v-if="docPreview" class="fixed inset-0 bg-[#1A1225]/30 backdrop-blur-sm flex items-center justify-center z-[200] p-4" @click.self="docPreview = null">
       <div class="bg-white border border-[#EEEAF2] rounded-3xl p-8 w-full max-w-lg animate-scale-in shadow-2xl max-h-[85vh] overflow-y-auto">
         <div class="flex items-center justify-between mb-6">
@@ -195,7 +184,6 @@
           <button class="text-[#7C757E] hover:text-[#1A1225]" @click="docPreview = null"><span class="material-icons-round">close</span></button>
         </div>
 
-        <!-- Document Header -->
         <div class="bg-[#F8F6FB] border border-[#EEEAF2] rounded-2xl p-6 mb-4">
           <div class="flex items-center gap-4 mb-4">
             <div class="w-14 h-14 bg-[#7630A3]/10 rounded-2xl flex items-center justify-center">
@@ -209,25 +197,21 @@
           </div>
         </div>
 
-        <!-- Mock Document Content -->
         <div class="border border-[#EEEAF2] rounded-2xl overflow-hidden mb-4">
           <div class="bg-white p-6 space-y-4">
-            <!-- Simulated document header -->
+         
             <div class="text-center pb-4 border-b border-[#EEEAF2]">
               <p class="text-[0.625rem] font-black uppercase tracking-widest text-[#7C757E] mb-1">Federal Democratic Republic of Ethiopia</p>
               <p class="font-heading text-base font-black text-[#1A1225]">{{ docPreview.docTitle }}</p>
               <p class="text-xs text-[#7C757E] mt-1">{{ docPreview.docSubtitle }}</p>
             </div>
 
-            <!-- Document fields -->
             <div class="space-y-3">
               <div v-for="field in docPreview.fields" :key="field.label" class="flex justify-between items-start py-2 border-b border-[#F8F6FB]">
                 <span class="text-xs text-[#7C757E] font-bold uppercase tracking-wider">{{ field.label }}</span>
                 <span class="text-sm font-bold text-[#1A1225] text-right max-w-[60%]">{{ field.value }}</span>
               </div>
             </div>
-
-            <!-- Validity section -->
             <div class="mt-4 p-3 bg-[#64D2B1]/5 border border-[#64D2B1]/20 rounded-xl">
               <div class="flex items-center gap-2">
                 <span class="material-icons-round text-[#64D2B1] text-base">verified</span>
@@ -237,7 +221,6 @@
           </div>
         </div>
 
-        <!-- Actions -->
         <div class="flex gap-3">
           <button class="flex-1 py-3 rounded-xl bg-[#7630A3] text-white font-bold text-sm hover:brightness-110 transition-all flex items-center justify-center gap-2"
             @click="downloadMockDoc">
@@ -279,7 +262,6 @@ const checklistItems = [
   { key: 'no_suspicious', label: 'No suspicious activity' }
 ]
 
-// Tabs: All first
 const tabs = computed(() => [
   { value: 'all', label: 'All', count: adminStore.businesses.length },
   { value: 'pending', label: 'Pending', count: adminStore.pendingBusinesses.length },

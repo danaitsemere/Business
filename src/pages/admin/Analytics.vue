@@ -6,14 +6,14 @@
         <p class="text-[#475569] font-medium">Platform performance insights and metrics</p>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Time Filter -->
+      
         <select class="input-gts max-w-[180px]" v-model="timeRange">
           <option value="7d">Last 7 Days</option>
           <option value="30d">Last 30 Days</option>
           <option value="90d">Last 90 Days</option>
           <option value="all">All Time</option>
         </select>
-        <!-- Export -->
+      
         <div class="relative">
           <button class="px-4 py-3 rounded-xl bg-white border border-[#EEEAF2] text-[#475569] text-sm font-bold hover:border-[#7630A3] hover:text-[#7630A3] transition-all flex items-center gap-2"
             @click="showExport = !showExport">
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <!-- Key Metrics -->
+   
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
       <div class="stat-card-gts">
         <div class="w-10 h-10 rounded-2xl flex items-center justify-center mb-3 bg-[#7630A3]/10">
@@ -65,9 +65,9 @@
       </div>
     </div>
 
-    <!-- Charts Row -->
+  
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <!-- Revenue Chart -->
+   
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center justify-between mb-6">
           <h3 class="font-heading text-lg font-black text-[#1A1225]">Revenue Trend</h3>
@@ -86,7 +86,7 @@
         </div>
       </div>
 
-      <!-- Requests Per Day -->
+      
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <div class="flex items-center justify-between mb-6">
           <h3 class="font-heading text-lg font-black text-[#1A1225]">Requests Per Day</h3>
@@ -106,9 +106,9 @@
       </div>
     </div>
 
-    <!-- Top Services & Top Businesses -->
+    
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Top Services -->
+     
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <h3 class="font-heading text-lg font-black text-[#1A1225] mb-6">Top Services</h3>
         <div class="flex flex-col gap-4">
@@ -126,7 +126,7 @@
         </div>
       </div>
 
-      <!-- Top Businesses -->
+     
       <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm">
         <h3 class="font-heading text-lg font-black text-[#1A1225] mb-6">Top Performing Businesses</h3>
         <div class="flex flex-col gap-3">
@@ -148,7 +148,7 @@
       </div>
     </div>
 
-    <!-- Active Users Chart -->
+  
     <div class="bg-white rounded-3xl p-8 border border-[#EEEAF2] shadow-sm mt-6">
       <h3 class="font-heading text-lg font-black text-[#1A1225] mb-6">User Status Distribution</h3>
       <div class="flex flex-col gap-5">
@@ -177,7 +177,7 @@ const adminStore = useAdminStore()
 const timeRange = ref('30d')
 const showExport = ref(false)
 
-// Time-filtered data
+
 const filteredRevenueData = computed(() => {
   const allData = adminStore.getRevenueData()
   if (timeRange.value === '7d') return allData.slice(-2)
@@ -289,7 +289,7 @@ function handleExport(format) {
     const blob = new Blob([csv], { type: 'text/csv' })
     downloadBlob(blob, `gts_analytics_${data.generatedAt}.csv`)
   } else {
-    // Generate a text-based report for PDF format
+  
     let report = `GTS PLATFORM ANALYTICS REPORT\n`
     report += `${'='.repeat(50)}\n`
     report += `Period: ${data.title}\n`

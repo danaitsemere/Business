@@ -4,7 +4,6 @@ import { businesses as mockBusinesses } from '../mock/businesses.js'
 import { products as mockProducts } from '../mock/products.js'
 
 export const useCustomerStore = defineStore('customer', () => {
-  // Load persisted data from localStorage with immediate fallback to empty array
   const savedBusinesses = ref(JSON.parse(localStorage.getItem('gts_saved_businesses') || '[]'))
   const cart = ref(JSON.parse(localStorage.getItem('gts_cart') || '[]')) 
   const wishlist = ref(JSON.parse(localStorage.getItem('gts_wishlist') || '[]'))
@@ -18,7 +17,6 @@ export const useCustomerStore = defineStore('customer', () => {
   const selectedCategory = ref('')
   const selectedLocation = ref('')
 
-  // RELIABLE PERSISTENCE: Sync state to localStorage on every deep change
   watch(cart, (newCart) => {
     localStorage.setItem('gts_cart', JSON.stringify(newCart))
   }, { deep: true })
@@ -39,7 +37,6 @@ export const useCustomerStore = defineStore('customer', () => {
     localStorage.setItem('gts_orders', JSON.stringify(newOrders))
   }, { deep: true })
 
-  // Business Logic
   function searchBusinesses(query, category, location) {
     let results = [...allBusinesses.value]
     if (query) {
@@ -63,7 +60,6 @@ export const useCustomerStore = defineStore('customer', () => {
     return allBusinesses.value.find(b => b.id === id)
   }
 
-  // Product Logic with SORTING support
   function getFilteredProducts(query, category, type, sortBy = 'newest') {
     let results = [...allProducts.value]
     
@@ -84,13 +80,11 @@ export const useCustomerStore = defineStore('customer', () => {
       results = results.filter(p => p.category === category)
     }
 
-    // Apply sorting
     if (sortBy === 'price-low') {
       results.sort((a, b) => (a.salePrice || a.price) - (b.salePrice || b.price))
     } else if (sortBy === 'price-high') {
       results.sort((a, b) => (b.salePrice || b.price) - (a.salePrice || a.price))
     } else {
-      // newest arrivals - sort by createdAt desc
       results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     }
 
@@ -101,7 +95,6 @@ export const useCustomerStore = defineStore('customer', () => {
     return allProducts.value.find(p => p.id === id)
   }
 
-  // Cart Actions
   function addToCart(productId, quantity = 1) {
     const qty = parseInt(quantity) || 1
     const existing = cart.value.find(item => item.id === productId)
@@ -127,7 +120,6 @@ export const useCustomerStore = defineStore('customer', () => {
     cart.value = []
   }
 
-  // Wishlist Actions
   function toggleWishlist(productId) {
     if (wishlist.value.includes(productId)) {
       wishlist.value = wishlist.value.filter(id => id !== productId)
@@ -140,7 +132,6 @@ export const useCustomerStore = defineStore('customer', () => {
     return wishlist.value.includes(productId)
   }
 
-  // Service Request Actions
   function submitServiceRequest(request) {
     const newRequest = {
       id: Date.now(),
@@ -163,7 +154,6 @@ export const useCustomerStore = defineStore('customer', () => {
     }
   }
 
-  // Order / Checkout Actions
   function placeOrder(orderData) {
     const newOrder = {
       id: Date.now(),
@@ -186,7 +176,6 @@ export const useCustomerStore = defineStore('customer', () => {
     }
   }
 
-  // Reactive Computeds
   const cartTotal = computed(() => {
     return cart.value.reduce((total, item) => {
       const product = getProductById(item.id)

@@ -7,7 +7,6 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => !!currentUser.value)
   const userRole = computed(() => currentUser.value?.role || '')
 
-  // Initialize users in localStorage if not present
   if (!localStorage.getItem('gts_users')) {
     localStorage.setItem('gts_users', JSON.stringify(mockUsers))
   }
@@ -70,7 +69,6 @@ export const useAuthStore = defineStore('auth', () => {
     if (currentUser.value) {
       Object.assign(currentUser.value, data)
       localStorage.setItem('gts_user', JSON.stringify(currentUser.value))
-      // Also update in the users list
       const users = getStoredUsers()
       const idx = users.findIndex(u => u.id === currentUser.value.id)
       if (idx !== -1) {
