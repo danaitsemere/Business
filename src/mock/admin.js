@@ -149,13 +149,3 @@ export const reportsList = [
   { id: 5, name: 'Product Listing Activity', type: 'Products', generatedAt: '2026-03-20', status: 'ready' }
 ]
 
-export const systemSettings = {
-  platformName: 'GTS Platform',
-  supportEmail: 'support@gts.et',
-  maintenanceMode: false,
-  enableNotifications: true,
-  enableAnalytics: true,
-  defaultCurrency: 'ETB',
-  defaultRegion: 'Ethiopia',
-  theme: 'dark'
-}
