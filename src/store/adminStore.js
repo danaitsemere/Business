@@ -69,9 +69,32 @@ export const useAdminStore = defineStore('admin', () => {
   const activeUsers = computed(() => users.value.filter(u => u.status === 'active'))
   const suspendedUsers = computed(() => users.value.filter(u => u.status === 'suspended'))
   const customerUsers = computed(() => users.value.filter(u => u.role === 'customer'))
+  const adminUsers = computed(() => users.value.filter(u => u.role === 'admin'))
+  const merchantUsers = computed(() => users.value.filter(u => u.role === 'merchant'))
+  const serviceProviderUsers = computed(() => users.value.filter(u => u.role === 'service_provider'))
 
   function getUserById(id) {
     return users.value.find(u => u.id === id)
+  }
+
+  function createUser(userData) {
+    const newUser = {
+      id: Date.now(),
+      fullName: userData.fullName,
+      email: userData.email,
+      password: userData.password || 'password123',
+      phone: userData.phone,
+      role: userData.role,
+      location: userData.location || '',
+      status: 'active',
+      avatar: userData.fullName.split(' ').map(n => n.charAt(0)).join('').substring(0, 2).toUpperCase(),
+      createdAt: new Date().toISOString().split('T')[0]
+    }
+    users.value.unshift(newUser)
+    persistUsers()
+    addLog('user_created', 'person_add', `New user "${newUser.fullName}" created with role ${newUser.role}`, 'success')
+    showToast(`User "${newUser.fullName}" created successfully`)
+    return newUser
   }
 
   function activateUser(userId) {
@@ -106,6 +129,8 @@ export const useAdminStore = defineStore('admin', () => {
   const pendingBusinesses = computed(() => businesses.value.filter(b => b.status === 'pending'))
   const rejectedBusinesses = computed(() => businesses.value.filter(b => b.status === 'rejected'))
   const suspendedBusinesses = computed(() => businesses.value.filter(b => b.status === 'suspended'))
+  const merchantBusinesses = computed(() => businesses.value.filter(b => b.businessType === 'merchant'))
+  const serviceProviderBusinesses = computed(() => businesses.value.filter(b => b.businessType === 'service_provider'))
 
   function getBusinessById(id) {
     return businesses.value.find(b => b.id === id)
@@ -203,8 +228,31 @@ export const useAdminStore = defineStore('admin', () => {
 
   const approvedProducts = computed(() => {
     const approvedBizIds = approvedBusinesses.value.map(b => b.id)
-    return products.value.filter(p => approvedBizIds.includes(p.merchantId))
+    return products.value.filter(p => approvedBizIds.includes(p.businessId))
   })
+
+  const reportedProducts = ref(JSON.parse(localStorage.getItem('gts_reported_products') || 'null') || [
+    { id: 101, productId: 3, productName: 'Power Bank Max 40000mAh', businessId: 1, businessName: 'Habesha Electronics', reportCategory: 'Misleading Description', industry: 'Electronics', reportedBy: 'Yusuf Ibrahim', reportDate: '2026-04-10', status: 'pending', description: 'The product description mentions 40000mAh but the actual capacity is much lower. False advertising.' },
+    { id: 102, productId: 7, productName: 'Embroidered Evening Dress', businessId: 2, businessName: 'Selam Fashion House', reportCategory: 'Quality Issue', industry: 'Fashion', reportedBy: 'Tigist Hailu', reportDate: '2026-04-08', status: 'under_review', description: 'Received a completely different product than what was shown. Material quality is very poor.' },
+    { id: 103, productId: 15, productName: 'Adjustable Dumbbell Set', businessId: 4, businessName: 'Ethio Fitness Pro', reportCategory: 'Safety Concern', industry: 'Sports & Fitness', reportedBy: 'Abebe Kebede', reportDate: '2026-04-05', status: 'resolved', description: 'The quick-lock mechanism is not holding weights securely. Potential safety hazard.' },
+    { id: 104, productId: 11, productName: 'Organic Ethiopian Coffee Beans', businessId: 3, businessName: 'Sheger Organic Foods', reportCategory: 'Counterfeit', industry: 'Food & Beverage', reportedBy: 'Meron Assefa', reportDate: '2026-04-12', status: 'pending', description: 'Product is labeled as Yirgacheffe but tastes nothing like genuine Yirgacheffe. Suspected counterfeit.' },
+    { id: 105, productId: 13, productName: 'Natural Shea Butter Moisturizer', businessId: 5, businessName: 'Lucy Beauty & Wellness', reportCategory: 'Allergic Reaction', industry: 'Health & Beauty', reportedBy: 'Tigist Hailu', reportDate: '2026-04-14', status: 'under_review', description: 'Product caused severe allergic reaction. Ingredient list does not match actual contents.' },
+    { id: 106, productId: 9, productName: 'Wireless Earbuds Pro', businessId: 1, businessName: 'Habesha Electronics', reportCategory: 'Defective Product', industry: 'Electronics', reportedBy: 'Abebe Kebede', reportDate: '2026-04-15', status: 'pending', description: 'Left earbud stopped working after 2 days. Charging case also has issues.' },
+    { id: 107, productId: 19, productName: 'Modern Trench Coat', businessId: 2, businessName: 'Selam Fashion House', reportCategory: 'Wrong Item', industry: 'Fashion', reportedBy: 'Yusuf Ibrahim', reportDate: '2026-04-03', status: 'resolved', description: 'Received a completely different coat than what was ordered. Wrong size and color.' },
+    { id: 108, productId: 12, productName: 'Organic Honey Large Jar', businessId: 3, businessName: 'Sheger Organic Foods', reportCategory: 'Expired Product', industry: 'Food & Beverage', reportedBy: 'Abebe Kebede', reportDate: '2026-04-11', status: 'pending', description: 'Product arrived with an expired date. Honey had crystallized and changed color.' }
+  ])
+
+  function persistReportedProducts() { localStorage.setItem('gts_reported_products', JSON.stringify(reportedProducts.value)) }
+
+  function updateReportStatus(reportId, newStatus) {
+    const report = reportedProducts.value.find(r => r.id === reportId)
+    if (report) {
+      report.status = newStatus
+      persistReportedProducts()
+      addLog('report_updated', 'flag', `Product report #${reportId} status changed to "${newStatus}"`, 'info')
+      showToast(`Report #${reportId} updated to ${newStatus.replace(/_/g, ' ')}`)
+    }
+  }
 
   const allServiceRequests = computed(() => serviceRequests.value)
   const pendingRequests = computed(() => serviceRequests.value.filter(r => r.status === 'pending'))
@@ -304,15 +352,21 @@ export const useAdminStore = defineStore('admin', () => {
     topBusinesses,
     reports,
     subscriptionPlans,
+    reportedProducts,
     toast,
     allUsers,
     activeUsers,
     suspendedUsers,
     customerUsers,
+    adminUsers,
+    merchantUsers,
+    serviceProviderUsers,
     approvedBusinesses,
     pendingBusinesses,
     rejectedBusinesses,
     suspendedBusinesses,
+    merchantBusinesses,
+    serviceProviderBusinesses,
     approvedProducts,
     allServiceRequests,
     pendingRequests,
@@ -323,6 +377,7 @@ export const useAdminStore = defineStore('admin', () => {
     rejectedRequests,
     showToast,
     getUserById,
+    createUser,
     activateUser,
     suspendUser,
     deleteUser,
@@ -336,6 +391,7 @@ export const useAdminStore = defineStore('admin', () => {
     updateProduct,
     deleteProduct,
     toggleProductStatus,
+    updateReportStatus,
     updateRequestStatus,
     assignProvider,
     rejectRequest,

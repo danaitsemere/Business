@@ -22,6 +22,3 @@ import AdminToast from '../components/admin/AdminToast.vue'
 
 const sidebarCollapsed = ref(false)
 </script>
-
-<style scoped>
-</style>

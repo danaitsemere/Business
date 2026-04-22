@@ -29,10 +29,10 @@
             <input type="number" class="input-gts" v-model="form.estimatedCost" placeholder="0.00" step="0.01">
           </div>
           <div v-if="submitted" class="flex items-center gap-2.5 px-5 py-3 rounded-lg text-sm font-medium mb-5 bg-green-500/10 border border-green-500/30 text-green-400">
-            <span class="material-icons-round">check_circle</span> Service request submitted! A provider will respond shortly.
+            <CheckCircle2 class="w-5 h-5" /> Service request submitted! A provider will respond shortly.
           </div>
-          <button type="submit" class="btn-gts-primary btn-gts-lg w-full disabled:opacity-70 disabled:cursor-default" :disabled="submitted">
-            <span class="material-icons-round">send</span> Submit Request
+          <button type="submit" class="btn-gts-primary w-full disabled:opacity-70 disabled:cursor-default" :disabled="submitted">
+            <Send class="w-5 h-5" /> Submit Request
           </button>
         </form>
       </div>
@@ -44,13 +44,13 @@
             class="flex items-center gap-4 p-4 bg-surface-secondary rounded-lg cursor-pointer hover:bg-surface-elevated transition-colors"
             @click="form.serviceType = service.name">
             <div class="w-12 h-12 rounded-lg flex items-center justify-center shrink-0" :style="{ background: service.bg }">
-              <span class="material-icons-round text-xl" :style="{ color: service.color }">{{ service.icon }}</span>
+              <component :is="getLucideIcon(service.icon)" class="w-5 h-5" :style="{ color: service.color }" />
             </div>
             <div class="flex-1">
               <h4 class="font-heading text-[0.938rem] font-bold mb-0.5">{{ service.name }}</h4>
               <p class="text-xs text-neutral-500">{{ service.desc }}</p>
             </div>
-            <span class="material-icons-round text-neutral-500">chevron_right</span>
+            <ChevronRight class="w-5 h-5 text-neutral-500" />
           </div>
         </div>
       </div>
@@ -63,6 +63,8 @@ import { ref, computed } from 'vue'
 import { useAuthStore } from '../../store/authStore.js'
 import { useServiceProviderStore } from '../../store/serviceProviderStore.js'
 import { serviceTypes } from '../../mock/users.js'
+import { CheckCircle2, Send, ChevronRight } from 'lucide-vue-next'
+import { getLucideIcon } from '../../utils/icons.js'
 
 const authStore = useAuthStore(); const spStore = useServiceProviderStore()
 const user = computed(() => authStore.currentUser); const submitted = ref(false)

@@ -58,6 +58,54 @@ export const users = [
     status: 'suspended',
     avatar: 'MA',
     createdAt: '2026-02-15'
+  },
+  {
+    id: 9,
+    fullName: 'Solomon Girma',
+    email: 'solomon@habeshaelectronics.com',
+    password: 'password123',
+    phone: '+251916789012',
+    role: 'merchant',
+    location: 'Addis Ababa, Ethiopia',
+    status: 'active',
+    avatar: 'SG',
+    createdAt: '2025-08-15'
+  },
+  {
+    id: 10,
+    fullName: 'Hanna Tesfaye',
+    email: 'hanna@selamfashion.com',
+    password: 'password123',
+    phone: '+251917890123',
+    role: 'merchant',
+    location: 'Mekelle, Ethiopia',
+    status: 'active',
+    avatar: 'HT',
+    createdAt: '2025-09-02'
+  },
+  {
+    id: 11,
+    fullName: 'Bereket Alemu',
+    email: 'bereket@delivery.com',
+    password: 'password123',
+    phone: '+251918901234',
+    role: 'service_provider',
+    location: 'Addis Ababa, Ethiopia',
+    status: 'active',
+    avatar: 'BA',
+    createdAt: '2025-10-10'
+  },
+  {
+    id: 12,
+    fullName: 'Frehiwot Desta',
+    email: 'frehiwot@zemendigital.com',
+    password: 'password123',
+    phone: '+251919012345',
+    role: 'service_provider',
+    location: 'Addis Ababa, Ethiopia',
+    status: 'active',
+    avatar: 'FD',
+    createdAt: '2025-11-20'
   }
 ]
 

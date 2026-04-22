@@ -10,13 +10,7 @@
         'bg-[#7630A3] border-[#7630A3]/30 text-white':  adminStore.toast.type === 'info'
       }"
     >
-      <span class="material-icons-round text-lg">
-        {{
-          adminStore.toast.type === 'success' ? 'check_circle' :
-          adminStore.toast.type === 'warning' ? 'warning' :
-          adminStore.toast.type === 'error'   ? 'error' : 'info'
-        }}
-      </span>
+      <component :is="getToastIcon()" class="w-5 h-5" />
       {{ adminStore.toast.message }}
     </div>
   </Transition>
@@ -24,11 +18,17 @@
 
 <script setup>
 import { useAdminStore } from '../../store/adminStore.js'
+import { CheckCircle2, AlertTriangle, AlertCircle, Info } from 'lucide-vue-next'
 
 const adminStore = useAdminStore()
+
+function getToastIcon() {
+  const map = { success: CheckCircle2, warning: AlertTriangle, error: AlertCircle, info: Info }
+  return map[adminStore.toast.type] || Info
+}
 </script>
 
-<style scoped>
+<style>
 .toast-enter-active { animation: slideUp 0.3s ease-out; }
 .toast-leave-active { animation: slideUp 0.3s ease-in reverse; }
 @keyframes slideUp {

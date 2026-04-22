@@ -1,63 +1,62 @@
 <template>
-  <div class="w-full max-w-xl mx-auto px-4">
-    <div class="bg-white rounded-[2.5rem] p-10 lg:p-14 border border-[#EEEAF2] shadow-2xl relative overflow-hidden text-center">
+  <div class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+    style="background: linear-gradient(135deg, #E8E1F0 0%, #D6E8F7 40%, #E8E1F0 70%, #DCE6F5 100%);">
+    <img src="/image/wave-background.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none z-0">
 
-      <router-link to="/" class="absolute left-10 top-10 text-[#475569] hover:text-[#7630A3] transition-colors group z-20">
-         <span class="material-icons-round text-2xl group-hover:-translate-x-1 transition-transform">arrow_back</span>
-      </router-link>
-
-      <div class="mb-10 pt-4 flex flex-col items-center">
-        <img src="../../assets/logo.png" alt="GTS Logo" class="h-16 w-auto mb-8 hover:scale-105 transition-transform duration-300">
-        
-        <div class="flex items-center justify-center gap-4 mb-4">
-           <div class="h-10 w-0.5 bg-[#7630A3] opacity-30 rounded-full"></div>
-           <div class="text-left">
-              <h2 class="font-heading text-2xl font-black text-[#7630A3] leading-none mb-1">
-                 Sign In
-              </h2>
-              <span class="text-[0.625rem] font-black text-[#475569] uppercase tracking-[0.3em]">
-                 Grand Tech Solutions
-              </span>
-           </div>
-        </div>
+    <div class="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+      <div class="hidden lg:flex w-1/2 items-center justify-start pointer-events-none">
+        <img src="/image/marketplace-illustration.png" alt="" 
+          class="w-full max-w-[700px] max-h-[720px] object-contain drop-shadow-2xl animate-float">
       </div>
 
-      <div v-if="error" class="flex items-center gap-2.5 px-5 py-3 rounded-2xl text-sm font-bold mb-6 bg-red-50 border border-red-200 text-red-600 text-left animate-fade-in">
-        <span class="material-icons-round">error</span>
-        {{ error }}
+      <div class="w-full lg:w-[500px] animate-fade-in">
+        <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-12 border-2 border-[#7630A3]/15 shadow-[0_20px_60px_-15px_rgba(118,48,163,0.15)] relative">
+          <router-link to="/" class="absolute left-8 top-8 text-[#A399AC] hover:text-[#7630A3] transition-colors group">
+            <ArrowLeft class="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+          </router-link>
+
+          <div class="flex items-center justify-center gap-3 mb-8">
+            <img src="/image/logo.png" alt="GTS Logo" class="h-10 w-auto">
+            <div class="text-left">
+              <span class="font-heading text-sm font-black text-[#7630A3] leading-none block">Grand Technology</span>
+              <span class="font-heading text-sm font-black text-[#7630A3] leading-none block">Solutions</span>
+            </div>
+          </div>
+
+          <h1 class="font-heading text-3xl font-black text-[#1A1225] text-center mb-8">Welcome Back</h1>
+
+          <div v-if="error" class="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-bold mb-5 bg-red-50 border border-red-200 text-red-600 animate-fade-in">
+            <AlertCircle class="w-4 h-4 shrink-0" />
+            {{ error }}
+          </div>
+
+          <form @submit.prevent="handleLogin" class="space-y-4">
+            <input type="email" v-model="email" placeholder="Email"
+              class="input-gts"
+              required id="login-email">
+
+            <input type="password" v-model="password" placeholder="Password"
+              class="input-gts"
+              required id="login-password">
+
+            <button type="submit"
+              class="btn-gts-primary w-full"
+              :disabled="loading">
+              <Loader2 v-if="loading" class="w-5 h-5 animate-spin" />
+              <span v-else>Sign In</span>
+            </button>
+          </form>
+
+          <div class="text-center mt-6 space-y-2">
+            <router-link to="/forgot-password" class="block text-sm text-[#475569] font-medium hover:text-[#7630A3] transition-colors">
+              Forgot Password?
+            </router-link>
+            <router-link to="/register" class="block text-sm text-[#475569] font-medium hover:text-[#7630A3] transition-colors">
+              Create an Account
+            </router-link>
+          </div>
+        </div>
       </div>
-
-      <form @submit.prevent="handleLogin" class="space-y-6 relative z-10 text-left">
-        <div class="space-y-4">
-           <div class="space-y-2">
-             <label class="text-[0.688rem] font-black uppercase text-[#7C757E] tracking-widest pl-1">Email Address</label>
-             <input type="email" class="input-gts" v-model="email" placeholder="your@email.com" required id="login-email">
-           </div>
-           <div class="space-y-2">
-             <label class="text-[0.688rem] font-black uppercase text-[#7C757E] tracking-widest pl-1">Password</label>
-             <input type="password" class="input-gts" v-model="password" placeholder="Enter your password" required id="login-password">
-           </div>
-        </div>
-
-        <div class="flex justify-between items-center text-[0.813rem] font-bold text-[#475569]">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" v-model="rememberMe" class="accent-[#7630A3] rounded w-4 h-4">
-            <span>Remember me</span>
-          </label>
-          <router-link to="/forgot-password" class="text-[#7630A3] hover:underline font-black">Forgot password?</router-link>
-        </div>
-
-        <button type="submit" class="btn-gts-primary w-full py-5 flex items-center justify-center gap-3" :disabled="loading">
-          <span v-if="loading" class="material-icons-round animate-spin text-lg">sync</span>
-          <template v-else>
-            Sign In <span class="material-icons-round text-lg">login</span>
-          </template>
-        </button>
-      </form>
-
-      <p class="mt-8 text-sm font-medium text-[#475569]">
-        Don't have an account? <router-link to="/register" class="text-[#7630A3] font-black hover:underline">Create one</router-link>
-      </p>
     </div>
   </div>
 </template>
@@ -66,12 +65,12 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../store/authStore.js'
+import { AlertCircle, Loader2, ArrowLeft } from 'lucide-vue-next'
 
 const router = useRouter()
 const authStore = useAuthStore()
 const email = ref('')
 const password = ref('')
-const rememberMe = ref(false)
 const error = ref('')
 const loading = ref(false)
 
@@ -92,9 +91,3 @@ function handleLogin() {
   }, 600)
 }
 </script>
-
-<style scoped>
-.shadow-soft {
-  box-shadow: 0 10px 40px -10px rgba(118, 48, 163, 0.1);
-}
-</style>

@@ -7,14 +7,14 @@
 
     <div class="flex items-center gap-4 mb-5 flex-wrap">
       <div class="relative flex-1 min-w-[250px]">
-        <span class="material-icons-round absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500 text-xl">search</span>
-        <input type="text" v-model="query" placeholder="Search businesses..." class="input-gts pl-11 rounded-full" @keyup.enter="doSearch" id="search-input">
+        <Search class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500" />
+        <input type="text" v-model="query" placeholder="Search businesses..." class="input-gts pl-12" @keyup.enter="doSearch" id="search-input">
       </div>
-      <select class="select-gts w-[200px]" v-model="categoryFilter">
+      <select class="select-gts max-w-[200px]" v-model="categoryFilter">
         <option value="">All Categories</option>
         <option v-for="c in categories" :key="c" :value="c">{{ c }}</option>
       </select>
-      <select class="select-gts w-[200px]" v-model="locationFilter">
+      <select class="select-gts max-w-[200px]" v-model="locationFilter">
         <option value="">All Locations</option>
         <option value="Addis Ababa">Addis Ababa</option>
         <option value="Hawassa">Hawassa</option>
@@ -36,12 +36,12 @@
             <h4 class="font-heading font-bold truncate">{{ biz.name }}</h4>
             <div class="flex items-center gap-2">
               <span class="badge-primary">{{ biz.category }}</span>
-              <span v-if="biz.verified" class="text-blue-400"><span class="material-icons-round text-base">verified</span></span>
+              <span v-if="biz.verified" class="text-blue-400"><BadgeCheck class="w-4 h-4" /></span>
             </div>
           </div>
-          <button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-elevated border border-white/[0.06] text-neutral-500 hover:text-primary-300 hover:border-primary-400 transition-all"
+          <button class="btn-gts-secondary !w-11 !h-11 !px-0 bg-surface-elevated"
             @click.stop="toggleSave(biz.id)">
-            <span class="material-icons-round">{{ customerStore.isBusinessSaved(biz.id) ? 'bookmark' : 'bookmark_border' }}</span>
+            <component :is="customerStore.isBusinessSaved(biz.id) ? BookmarkCheck : Bookmark" class="w-5 h-5" />
           </button>
         </div>
         <p class="text-neutral-500 text-[0.813rem] line-clamp-2 mb-3">{{ biz.description }}</p>
@@ -49,15 +49,15 @@
           <span v-for="tag in biz.tags" :key="tag" class="chip-gts text-xs py-1 px-2.5">{{ tag }}</span>
         </div>
         <div class="flex gap-4">
-          <span class="flex items-center gap-1 text-xs text-neutral-500"><span class="material-icons-round text-sm">location_on</span>{{ biz.location }}</span>
-          <span class="flex items-center gap-1 text-xs text-neutral-500"><span class="material-icons-round text-sm">star</span>{{ biz.rating }}</span>
-          <span class="flex items-center gap-1 text-xs text-neutral-500"><span class="material-icons-round text-sm">inventory_2</span>{{ biz.productCount }}</span>
+          <span class="flex items-center gap-1 text-xs text-neutral-500"><MapPin class="w-4 h-4" />{{ biz.location }}</span>
+          <span class="flex items-center gap-1 text-xs text-neutral-500"><Star class="w-4 h-4" />{{ biz.rating }}</span>
+          <span class="flex items-center gap-1 text-xs text-neutral-500"><Package class="w-4 h-4" />{{ biz.productCount }}</span>
         </div>
       </div>
     </div>
 
     <div v-if="!results.length" class="flex flex-col items-center py-16 text-center">
-      <span class="material-icons-round text-6xl text-neutral-500/50 mb-4">search_off</span>
+      <SearchX class="w-16 h-16 text-neutral-500/50 mb-4" />
       <h3 class="font-heading font-bold text-[#b8b0c4] mb-2">No businesses found</h3>
       <p class="text-neutral-500">Try adjusting your search or filters</p>
     </div>
@@ -68,6 +68,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useCustomerStore } from '../../store/customerStore.js'
 import { categories } from '../../mock/users.js'
+import { Search, BadgeCheck, BookmarkCheck, Bookmark, MapPin, Star, Package, SearchX } from '../../utils/icons.js'
 
 const customerStore = useCustomerStore()
 const query = ref(customerStore.searchQuery || '')

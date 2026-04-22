@@ -2,10 +2,10 @@
   <header class="flex items-center justify-between px-10 py-6 border-b border-[#EEEAF2] bg-white/80 backdrop-blur-xl sticky top-0 z-50">
     <div class="flex items-center gap-6">
       <button
-        class="text-[#475569] p-2 rounded-xl hover:bg-[#F8F6FB] hover:text-[#7630A3] transition-colors"
+        class="btn-gts-secondary !w-11 !h-11 !px-0"
         @click="$emit('toggle')"
       >
-        <span class="material-icons-round text-2xl">{{ collapsed ? 'menu_open' : 'menu' }}</span>
+        <component :is="collapsed ? PanelLeftOpen : Menu" class="w-6 h-6" />
       </button>
       <div class="flex flex-col">
         <span class="text-[0.625rem] font-black text-[#7630A3] uppercase tracking-[0.3em] mb-1">Dashboard</span>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="flex items-center gap-4">
-      <div class="w-12 h-12 rounded-2xl bg-[#7630A3] flex items-center justify-center text-white font-black shadow-soft cursor-pointer hover:brightness-110 transition-all">
+      <div class="w-12 h-12 rounded-2xl bg-[#7630A3] flex items-center justify-center text-white font-black shadow-[0_4px_20px_-4px_rgba(118,48,163,0.15)] cursor-pointer hover:brightness-110 transition-all">
         SA
       </div>
     </div>
@@ -24,6 +24,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { Menu, PanelLeftOpen } from 'lucide-vue-next'
 
 defineProps({
   collapsed: { type: Boolean, default: false }
@@ -38,7 +39,6 @@ const navItems = [
   { path: '/admin/users',            label: 'Users' },
   { path: '/admin/businesses',       label: 'Businesses' },
   { path: '/admin/products',         label: 'Products' },
-  { path: '/admin/service-requests', label: 'Service Requests' },
   { path: '/admin/verifications',    label: 'Verifications' },
   { path: '/admin/analytics',        label: 'Analytics' },
   { path: '/admin/reports',          label: 'Reports' }
@@ -49,7 +49,3 @@ const pageTitle = computed(() => {
   return item?.label || 'Overview'
 })
 </script>
-
-<style scoped>
-.shadow-soft { box-shadow: 0 4px 20px -4px rgba(118, 48, 163, 0.15); }
-</style>

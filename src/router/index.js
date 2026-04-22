@@ -26,8 +26,8 @@ const routes = [
       { path: 'business/:id', name: 'BusinessProfile', component: () => import('../pages/customer/BusinessProfile.vue') },
       { path: 'product/:id', name: 'ProductDetails', component: () => import('../pages/customer/ProductDetails.vue') },
       { path: 'service-request', name: 'ServiceRequest', component: () => import('../pages/customer/ServiceRequest.vue') },
-      { path: 'profile', name: 'CustomerProfile', component: () => import('../pages/customer/Profile.vue') },
-      { path: 'checkout', name: 'Checkout', component: () => import('../pages/customer/Checkout.vue') }
+      { path: 'chat', name: 'CustomerChat', component: () => import('../pages/customer/Chat.vue') },
+      { path: 'profile', name: 'CustomerProfile', component: () => import('../pages/customer/Profile.vue') }
     ]
   },
 
@@ -40,10 +40,9 @@ const routes = [
       { path: 'users', name: 'AdminUsers', component: () => import('../pages/admin/UserManagement.vue') },
       { path: 'businesses', name: 'AdminBusinesses', component: () => import('../pages/admin/BusinessManagement.vue') },
       { path: 'products', name: 'AdminProducts', component: () => import('../pages/admin/ProductManagement.vue') },
-      { path: 'service-requests', name: 'AdminServiceRequests', component: () => import('../pages/admin/ServiceRequests.vue') },
-      { path: 'service-requests/:id', name: 'AdminServiceRequestDetail', component: () => import('../pages/admin/ServiceRequestDetail.vue') },
+
       { path: 'verifications', name: 'AdminVerifications', component: () => import('../pages/admin/Verifications.vue') },
-      { path: 'analytics', name: 'AdminAnalytics', component: () => import('../pages/admin/Analytics.vue') },
+
       { path: 'reports', name: 'AdminReports', component: () => import('../pages/admin/Reports.vue') }
     ]
   },

@@ -3,7 +3,7 @@ export const systemLogs = [
     id: 1,
     type: 'user_registered',
     icon: 'person_add',
-    message: 'New customer registered: Abebe Kebede',
+    message: 'New user registered: Abebe Kebede',
     severity: 'info',
     timestamp: '2026-04-06T14:30:00'
   },
@@ -11,7 +11,7 @@ export const systemLogs = [
     id: 2,
     type: 'business_pending',
     icon: 'store',
-    message: 'New business application: Anbessa Construction Co.',
+    message: 'New business application from Anbessa Construction Co.',
     severity: 'warning',
     timestamp: '2026-04-06T13:15:00'
   },
@@ -27,7 +27,7 @@ export const systemLogs = [
     id: 4,
     type: 'business_approved',
     icon: 'check_circle',
-    message: 'Lucy Beauty & Wellness has been approved',
+    message: 'Lucy Beauty & Wellness approved',
     severity: 'success',
     timestamp: '2026-04-06T11:45:00'
   },
@@ -35,7 +35,7 @@ export const systemLogs = [
     id: 5,
     type: 'user_registered',
     icon: 'person_add',
-    message: 'New customer registered: Meron Assefa',
+    message: 'New user registered: Meron Assefa',
     severity: 'info',
     timestamp: '2026-04-06T10:30:00'
   },
@@ -43,7 +43,7 @@ export const systemLogs = [
     id: 6,
     type: 'business_approved',
     icon: 'check_circle',
-    message: 'Selam Fashion House application approved',
+    message: 'Selam Fashion House approved',
     severity: 'success',
     timestamp: '2026-04-06T09:20:00'
   },
@@ -51,7 +51,7 @@ export const systemLogs = [
     id: 7,
     type: 'request_completed',
     icon: 'task_alt',
-    message: 'Service request #3 marked as completed',
+    message: 'Service request #3 completed',
     severity: 'info',
     timestamp: '2026-04-05T18:00:00'
   },
@@ -59,7 +59,7 @@ export const systemLogs = [
     id: 8,
     type: 'report_generated',
     icon: 'assessment',
-    message: 'Monthly analytics report generated for March 2026',
+    message: 'Monthly report generated for March 2026',
     severity: 'info',
     timestamp: '2026-04-05T08:00:00'
   },
@@ -67,7 +67,7 @@ export const systemLogs = [
     id: 9,
     type: 'business_rejected',
     icon: 'cancel',
-    message: 'Business application rejected: Gebeya Fake Traders',
+    message: 'Gebeya Fake Traders rejected',
     severity: 'danger',
     timestamp: '2026-04-04T16:45:00'
   },
@@ -75,7 +75,7 @@ export const systemLogs = [
     id: 10,
     type: 'user_suspended',
     icon: 'block',
-    message: 'User Meron Assefa suspended for review',
+    message: 'Meron Assefa suspended for review',
     severity: 'danger',
     timestamp: '2026-04-04T14:00:00'
   }
